@@ -2,7 +2,7 @@ class Answer < ApplicationRecord
   belongs_to :user
   belongs_to :question
   has_many :upvotes
-  validates :content, :user, :question presence: true
+  validates :content, :user, :question, presence: true
   validate :not_self_answer
 
   def not_self_answer

@@ -10,7 +10,7 @@ end
   Question.create(content: Faker::StarWars.quote)
 end
 
-Questions.all.each do |question|
+Question.all.each do |question|
   question.categories << Category.find(rand(1..5))
   question.user = User.find(rand(1..5))
   question.answers.build(content: Faker::Hacker.say_something_smart, user_id: rand(1..5)).save
