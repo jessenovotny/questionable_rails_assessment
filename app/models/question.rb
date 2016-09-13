@@ -8,4 +8,6 @@ class Question < ApplicationRecord
   has_many :respondents, through: :answers, class_name: 'User'
 
   has_many :upvotes
+
+  validates :content, presence: true
 end

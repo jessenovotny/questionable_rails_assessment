@@ -3,6 +3,8 @@ class Answer < ApplicationRecord
   belongs_to :question
   has_many :upvotes
 
+  validates :content, presence: true
+
   # def upvotes
   #   upvotes.count
   # end
