@@ -1,0 +1,58 @@
+Started GET "/" for ::1 at 2016-09-12 16:37:02 -0700
+Processing by ApplicationController#home as HTML
+  Rendering application/home.html.erb within layouts/application
+  Rendered application/home.html.erb within layouts/application (1.9ms)
+Completed 500 Internal Server Error in 540ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (Missing partial application/_nav with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :coffee, :jbuilder]}. Searched in:
+  * "/Users/jemino/Development/code/questionable_rails_assessment/app/views"
+):
+    10: 
+    11:   <body>
+    12:     <nav>
+    13:       <%= render 'nav' %>
+    14:     </nav>
+    15:     <%= yield %>
+    16:   </body>
+  
+app/views/layouts/application.html.erb:13:in `_app_views_layouts_application_html_erb__40767913845650240_70352271259620'
+  Rendering /Users/jemino/.rvm/gems/ruby-2.2.3/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout
+  Rendering /Users/jemino/.rvm/gems/ruby-2.2.3/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /Users/jemino/.rvm/gems/ruby-2.2.3/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (8.1ms)
+  Rendering /Users/jemino/.rvm/gems/ruby-2.2.3/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /Users/jemino/.rvm/gems/ruby-2.2.3/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.3ms)
+  Rendering /Users/jemino/.rvm/gems/ruby-2.2.3/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /Users/jemino/.rvm/gems/ruby-2.2.3/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/jemino/.rvm/gems/ruby-2.2.3/gems/actionpack-5.0.0.1/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (84.7ms)
+Started GET "/" for ::1 at 2016-09-12 16:37:36 -0700
+Processing by ApplicationController#home as HTML
+  Rendering application/home.html.erb within layouts/application
+  Rendered application/home.html.erb within layouts/application (0.4ms)
+  Rendered layouts/_nav.html.erb (0.4ms)
+Completed 200 OK in 22ms (Views: 20.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/facebook" for ::1 at 2016-09-12 16:37:40 -0700
+Started GET "/auth/facebook" for ::1 at 2016-09-12 16:37:40 -0700
+Started GET "/" for ::1 at 2016-09-12 16:38:15 -0700
+Processing by ApplicationController#home as HTML
+  Rendering application/home.html.erb within layouts/application
+  Rendered application/home.html.erb within layouts/application (0.3ms)
+  Rendered layouts/_nav.html.erb (0.5ms)
+Completed 200 OK in 22ms (Views: 20.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/facebook" for ::1 at 2016-09-12 16:38:16 -0700
+Started GET "/auth/facebook" for ::1 at 2016-09-12 16:38:16 -0700
+Started GET "/" for ::1 at 2016-09-12 16:43:17 -0700
+Processing by ApplicationController#home as HTML
+  Rendering application/home.html.erb within layouts/application
+  Rendered application/home.html.erb within layouts/application (0.4ms)
+  Rendered layouts/_nav.html.erb (0.4ms)
+Completed 200 OK in 33ms (Views: 31.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/facebook" for ::1 at 2016-09-12 16:43:19 -0700
+Started GET "/auth/facebook" for ::1 at 2016-09-12 16:43:19 -0700

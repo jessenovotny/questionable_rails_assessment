@@ -22,3 +22,10 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+1. Homepage lists all questions
+- Navbar has login/signup or welcome <name>/logout links
+- Only logged in users can ask questions/upvote answers
+
+2. 
