@@ -1,9 +1,14 @@
 class Answer < ApplicationRecord
   belongs_to :user
   belongs_to :question
+  has_many :upvotes
 
-  def most_upvoted
+  # def upvotes
+  #   upvotes.count
+  # end
+
+  def self.most_upvoted
     binding.pry
-    all.sort.first
+    #find answer with the most upvotes
   end
 end
