@@ -1,0 +1,5 @@
+<ul>
+  <% flash.each do |key, message| %>
+    <li><%= message if message.class == String %></li>
+  <% end %>
+</ul>
