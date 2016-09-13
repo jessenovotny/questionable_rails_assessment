@@ -1,2 +1,0 @@
-class UpvotesController < ApplicationController
-end

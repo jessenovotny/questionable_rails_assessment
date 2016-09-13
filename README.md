@@ -24,8 +24,16 @@ Things you may want to cover:
 * ...
 
 
-1. Homepage lists all questions
-- Navbar has login/signup or welcome <name>/logout links
-- Only logged in users can ask questions/upvote answers
-
-2. 
+[ ] Homepage lists all questions
+[ ] Navbar has login/signup or welcome <name>/logout links
+[ ] Only logged in users can ask questions/upvote answers
+[ ] questions#index checks for params[:user_id]
+[ ] questiones#show view displayes form to create
+[ ] answers#create creates new Answer and redirects to questions#show
+[ ] questiones#show view displayes all answers
+[ ] ApplicationController has current_user
+[ ] SessionsController can login and logout user
+[ ] 
+[ ] 
+[ ] 
+[ ] 
