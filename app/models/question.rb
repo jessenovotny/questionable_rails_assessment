@@ -6,4 +6,6 @@ class Question < ApplicationRecord
   
   has_many :answers
   has_many :respondents, through: :answers, class_name: 'User'
+
+  has_many :upvotes
 end
