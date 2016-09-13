@@ -1,7 +1,9 @@
 class Question < ApplicationRecord
-  belongs_to :user
+  belongs_to :asker, class_name: 'User'
+
   has_many :question_categories
   has_many :categories, through: :question_categories
+  
   has_many :answers
-  has_many :users, through: :answers, as: :answerers
+  has_many :respondents, through: :answers, class_name: 'User'
 end
