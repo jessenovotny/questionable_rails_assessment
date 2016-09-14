@@ -1,3 +1,10 @@
-<%= content_tag(:p, flash[:error], :id => "error") if flash[:error] %>
+<% if flash[:error] %>
+  <ul>
+    <% flash[:error].each do |error| %>
+      <li><%= content_tag(:p, "#{error}", :id => "error") %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <%= content_tag(:p, flash[:alert], :id => "alert") if flash[:alert] %>
 <%= content_tag(:p, flash[:notice], :id => "notice") if flash[:notice] %>

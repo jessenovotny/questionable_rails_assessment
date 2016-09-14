@@ -5,12 +5,13 @@
     <div>
     
     <% if logged_in? %>
-      <%= question.top_answer.try(:content) || "Answer this question" %>
-      <%= button_to("Upvote #{question.top_answer.upvote_count}", answer_upvotes_path(question.top_answer)) if question.top_answer %>
+      <%= question.top_answer.try(:content) || link_to("Answer this question", new_question_answer_path(question)) %>
+      <%= button_to("Upvote | #{question.top_answer.upvote_count}", answer_upvotes_path(question.top_answer)) if question.top_answer %>
      <% else %>
       <%= question.top_answer.try(:content) || link_to("Login to Answer this question", login_path) %>
      <% end %>
       
     </div>
+    <br>
   <% end %>
 </ul>

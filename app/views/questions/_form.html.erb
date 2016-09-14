@@ -1,8 +1,7 @@
 <%= form_for(question, url: user_questions_path(current_user)) do |f| %>
 
   <div class="field-with-errors">
-    <%= f.label :content %>
-    <%= text_area_tag 'question[content]', nil,rows: 5, cols: 30%>
+    <%= text_area_tag 'question[content]', "Ask your question here:", rows: 5, cols: 30%>
   </div>
 
   <div class="actions">

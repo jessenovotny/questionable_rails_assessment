@@ -18,6 +18,7 @@ class AnswersController < ApplicationController
       return redirect_to question_path(question)
     else
       flash[:error] = answer.errors.messages[:user]
+      # binding.pry
       redirect_to :back
     end
   end
