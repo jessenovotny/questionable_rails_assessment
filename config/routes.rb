@@ -10,6 +10,10 @@ Rails.application.routes.draw do
 
   resources :questions, only: [:show, :new, :create, :edit, :update, :destroy] do
     resources :answers, only: [:new, :create, :edit, :update, :destroy]
+    # resources :upvotes, only: [:create, :destroy]
+  end
+
+  resources :answer, only: [] do
     resources :upvotes, only: [:create, :destroy]
   end
 
@@ -20,5 +24,5 @@ Rails.application.routes.draw do
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  root 'questions#index', as: :home
+  root 'questions#index'
 end

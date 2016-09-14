@@ -5,9 +5,7 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true
   has_secure_password
 
-  def most_upvoted_answer
-    binding.pry
-    answers.order(upvote_count: :desc).first
-    answers.map{|answer| answer.upvote_count}.sort.first
+  def top_answer
+    answers.sort{|a, b| b.upvote_count <=> a.upvote_count}.first
   end
 end

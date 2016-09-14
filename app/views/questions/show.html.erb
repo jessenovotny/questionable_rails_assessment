@@ -11,10 +11,9 @@
 </p>
 
 <% @question.answers.each do |answer| %>
-  <div><%= answer.content %></div>
+  <div> <%= button_to "Upvote", question_upvotes_path(answer) %> | <%= answer.content %></div>
   <div>Submitted by: <%= answer.user.username %></div>
   <br>
-  <% end %>
+<% end %>
 
-<%= link_to 'Edit', edit_question_path(@question) %> |
-<%= link_to 'Back', questions_path %>
+<%= link_to 'Edit', edit_question_path(@question) %>
