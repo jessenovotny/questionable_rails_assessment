@@ -18,6 +18,7 @@ class UsersController < ApplicationController
   def create
     @user = User.create(user_params)
     if @user.valid?
+      login(@user)
       redirect_to root_path, notice: 'User was successfully created.'
     else
       render :new

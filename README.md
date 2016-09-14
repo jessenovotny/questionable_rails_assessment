@@ -33,7 +33,7 @@ Things you may want to cover:
 [ ] questiones#show view displayes all answers
 [ ] ApplicationController has current_user
 [ ] SessionsController can login and logout user
-[ ] 
+[ ] Error message for username that is not unique
 [ ] 
 [ ] 
 [ ] 

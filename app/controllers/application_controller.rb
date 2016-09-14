@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    # find current user from session
+    User.find_by(id: session[:uid])
+  end
+
+  def login(user)
+    session[:uid] = user.id
   end
 end
