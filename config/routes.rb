@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   post 'signup' => 'users#create'
   get '/auth/facebook/callback' => 'sessions#create'
 
-  resources :questions, only: [:show, :new, :create, :edit, :update, :destroy] do
+  resources :questions, only: [:index, :show] do
     resources :answers, only: [:new, :create, :edit, :update, :destroy]
   end
 
@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
 
   resources :users, only: [] do
-    resources :questions, only: [:index]
+    resources :questions, only: [:index, :new, :create, :edit, :update, :destroy]
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

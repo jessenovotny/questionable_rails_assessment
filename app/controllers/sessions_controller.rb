@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
         u.name = auth['info']['name']
         u.email = auth['info']['email']
       end
-    else #coming from signin page
+    else #coming from login page
       user = User.find_by(username: params[:user][:username])
       unless user && user.authenticate(params[:user][:password])
         flash[:alert] = "Unknown username and/or password"
