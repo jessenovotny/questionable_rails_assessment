@@ -1,8 +1,16 @@
 <h1>Questions</h1>
-<% @questions.each do |question| %>
-  <%= question.content %>
-  <%= question.user_id %>
-  <%= link_to 'Show', question %>
-  <%= link_to 'Edit', edit_question_path(question) %>
-  <%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %>
-<% end %>
+<ul>
+  <% @questions.each do |question| %>
+    <h3><%= question.content %></h3>
+    <div>
+    
+    <%= question.top_answer.try(:content) || "Answer this question" %>
+      
+    </div>
+    <div>
+    <%= link_to 'Show', question %> | 
+    <%= link_to 'Edit', edit_question_path(question) %> | 
+    <%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %>  
+    </div>
+  <% end %>
+</ul>

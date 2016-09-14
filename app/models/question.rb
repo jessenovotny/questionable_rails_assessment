@@ -10,4 +10,8 @@ class Question < ApplicationRecord
   has_many :upvotes
 
   validates :content, presence: true
+
+  def top_answer
+    answers.sort{|a, b| b.upvote_count <=> a.upvote_count}.first
+  end
 end

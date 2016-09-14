@@ -1,4 +1,4 @@
-<%= link_to("QUESTIONABLE", root_path) %>
+<%= link_to "QUESTIONABLE", home_path %>
 
 <% if logged_in? %>
   Welcome, <%= current_user.username %>!
@@ -8,6 +8,6 @@
 
   <%= link_to("Login with Facebook!", "/auth/facebook") %>
   <%= link_to("Login", login_path) %>
-  <%= link_to("Signup", singup_path) %>
+  <%= link_to("Signup", signup_path) %>
 
 <% end %>
