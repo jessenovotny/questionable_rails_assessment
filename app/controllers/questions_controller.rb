@@ -11,6 +11,10 @@ class QuestionsController < ApplicationController
   end
 
   def new
+    unless current_user == User.find(params[:user_id])
+      flash[:alert] = "You cannot ask questions for another user."
+      return redirect_to root_path
+    end
     @question = Question.new
   end
 
@@ -18,6 +22,7 @@ class QuestionsController < ApplicationController
   end
 
   def create
+    binding.pry
     if current_user == User.find(params[:user_id])
       params[:question][:asker_id] = current_user.id
       @question = Question.create(question_params)
