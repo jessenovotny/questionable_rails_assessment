@@ -10,7 +10,7 @@
     <%= link_to 'Destroy', @question, method: :delete, data: { confirm: 'Are you sure?' } %>  
   </div>
 <% else %>
-  <p><strong><%= button_to("Answer this question!", url: new_question_answer_path(@question)) %></strong></p>
+  <p><strong><%= button_to("Answer this question!", new_question_answer_path(@question), method: 'get') %></strong></p>
 <% end %>
 
 
