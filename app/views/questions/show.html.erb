@@ -10,7 +10,7 @@
   <%= @question.asker.username %>
 </p>
 
-<% @question.answers.each do |answer| %>
+<% @question.sort_answers_by_upvotes.each do |answer| %>
   
   
   <div> 
