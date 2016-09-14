@@ -10,15 +10,28 @@ class AnswersController < ApplicationController
   end
 
   def create
-    question = Question.find(params[:question_id])
-    params[:answer][:question_id] = question.id
     answer = current_user.answers.build(answer_params)
     if answer.save
       flash[:notice] = "Answer successfully submitted"
-      return redirect_to question_path(question)
+      return redirect_to question_path(answer.question)
     else
       flash[:error] = answer.errors.messages[:user]
-      # binding.pry
+      redirect_to :back
+    end
+  end
+
+  def edit
+    @question = Question.find(params[:question_id])
+    @answer = Answer.find(params[:id])
+  end
+
+  def update
+    answer = Answer.find(params[:id])
+    if answer.update(answer_params)
+      flash[:notice] = "Answer successfully updated"
+      return redirect_to question_path(answer.question)
+    else
+      flash[:error] = answer.errors.messages[:user]
       redirect_to :back
     end
   end

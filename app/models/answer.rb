@@ -3,7 +3,7 @@ class Answer < ApplicationRecord
   belongs_to :question
   has_many :upvotes
   validates :content, :user, :question, presence: true
-  validate :no_self_answer, :no_spam_answers
+  validate :no_self_answer, :no_spam_answers, :on => :create
 
   def no_self_answer
     if question.asker == user
