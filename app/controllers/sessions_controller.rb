@@ -1,6 +1,9 @@
 class SessionsController < ApplicationController
 
   def new
+    if logged_in?
+      return redirect_to root_path 
+    end
     @user = User.new
   end
 
@@ -14,7 +17,7 @@ class SessionsController < ApplicationController
     else #coming from login page
       user = User.find_by(username: params[:user][:username])
       unless user && user.authenticate(params[:user][:password])
-        flash[:alert] = "Unknown username and/or password"
+        flash[:error] = "Unknown username and/or password"
         return redirect_to :back
       end
     end
