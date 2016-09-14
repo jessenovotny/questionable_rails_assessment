@@ -2,12 +2,12 @@
 
 <%= form_for(@user, url: login_path) do |f| %>
 
-  <div class="field_with_errors">
+  <div class="field">
     <%= f.label :username %>
     <%= f.text_field :username %>
   </div>
 
-  <div class="field_with_errors">
+  <div class="field">
     <%= f.label :password %>
     <%= f.text_field :password %>
   </div>

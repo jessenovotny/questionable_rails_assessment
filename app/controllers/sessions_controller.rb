@@ -22,14 +22,12 @@ class SessionsController < ApplicationController
       end
     end
     login(user)
-    flash[:notice] = "Successfully logged in as #{user.username}"
-    redirect_to root_path
+    redirect_to root_path, notice: "Successfully logged in as #{user.username}"
   end
  
   def destroy
     session.destroy
-    flash[:notice] = "Successfully logged out."
-    redirect_to root_path
+    redirect_to root_path, notice: "Successfully logged out."
   end
 
   private

@@ -31,8 +31,7 @@ class QuestionsController < ApplicationController
         render :new
       end
     else 
-      flash[:alert] = "You cannot ask questions for another user."
-      redirect_to root_path
+      redirect_to root_path, altert: "You cannot ask questions for another user."
     end
   end
 
