@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Query:</strong>
+  <strong>Question:</strong>
   <%= @question.content %>
 </p>
 
@@ -23,4 +23,4 @@
   <br>
 <% end %>
 
-<%= link_to 'Edit', edit_question_path(@question) %>
+<%= link_to 'Edit', edit_user_question_path(current_user, @question) %>

@@ -1,4 +1,4 @@
-<%= form_for(question) do |f| %>
+<%= form_for(question, url: user_questions_path(current_user)) do |f| %>
   <% if question.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(question.errors.count, "error") %> prohibited this question from being saved:</h2>
@@ -13,7 +13,7 @@
 
   <div class="field-with-errors">
     <%= f.label :content %>
-    <%= text_area_tag 'content', nil,rows: 5, cols: 30%>
+    <%= text_area_tag 'question[content]', nil,rows: 5, cols: 30%>
   </div>
 
   <div class="actions">

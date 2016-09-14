@@ -18,11 +18,17 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = Question.new(question_params)
-    if @question.save
-      redirect_to @question, notice: 'Question was successfully created.'
-    else
-      render :new
+    if current_user == User.find(params[:user_id])
+      params[:question][:asker_id] = current_user.id
+      @question = Question.create(question_params)
+      if @question.valid?
+        return redirect_to @question, notice: 'Question was successfully created.'
+      else
+        render :new
+      end
+    else 
+      flash[:alert] = "You cannot ask questions for another user."
+      redirect_to root_path
     end
   end
 
@@ -45,6 +51,6 @@ class QuestionsController < ApplicationController
     end
 
     def question_params
-      params.require(:question).permit(:query, :user_id)
+      params.require(:question).permit(:content, :asker_id)
     end
 end
