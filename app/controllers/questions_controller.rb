@@ -22,7 +22,6 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    binding.pry
     if current_user == User.find(params[:user_id])
       params[:question][:asker_id] = current_user.id
       @question = Question.create(question_params)
