@@ -4,7 +4,8 @@
     <h3><%= link_to "#{question.content}", question %></h3>
     <div>
     
-    <%= question.top_answer.try(:content) || "Answer this question" %>
+     <%= question.top_answer.try(:content) || "Answer this question" %>
+     <%= button_to "Upvote #{question.top_answer.upvote_count}", answer_upvotes_path(question.top_answer) %>
       
     </div>
     <div>
