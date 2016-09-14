@@ -5,13 +5,22 @@ class SessionsController < ApplicationController
   end
 
   def create
-    binding.pry
-
-    # user = User.find_or_create_by(:uid => auth['uid']) do |u|
-    #   u.name = auth['info']['name']
-    #   u.email = auth['info']['email']
-    # end
-    # session[:user_id] = user.id
+    # binding.pry
+    if auth #coming from FB
+      user = User.find_or_create_by(:uid => auth['uid']) do |u|
+        u.name = auth['info']['name']
+        u.email = auth['info']['email']
+      end
+    else #coming from signin page
+      user = User.find_by(username: params[:user][:username])
+      unless user && user.authenticate(params[:user][:password])
+        flash[:alert] = "Unknown username and/or password"
+        return redirect_to :back
+      end
+    end
+    login(user)
+    flash[:message] = "Successfully logged in as #{user.username}"
+    redirect_to root_path
   end
  
   def destroy
