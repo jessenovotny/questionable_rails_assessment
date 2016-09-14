@@ -6,8 +6,8 @@ class Answer < ApplicationRecord
   validate :not_self_answer
 
   def not_self_answer
-    if question.user == user
-      errors.add("cannot answer your own question.")
+    if question.asker == user
+      errors.add(:user, "cannot answer your own question.")
     end
   end
 

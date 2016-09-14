@@ -6,7 +6,7 @@ class Upvote < ApplicationRecord
 
   def no_self_upvote
     if voter == answer.user
-      errors.add("cannot upvote your own answer.")
+      errors.add(:voter, "cannot upvote your own answer.")
     end
   end
 
