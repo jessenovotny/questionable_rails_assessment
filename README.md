@@ -24,9 +24,9 @@ Things you may want to cover:
 * ...
 
 
-[ ] Homepage lists all questions
-[ ] Navbar has login/signup or welcome <name>/logout links
-[ ] Only logged in users can ask questions/upvote answers
+[x] Homepage lists all questions
+[x] Navbar has login/signup or welcome <name>/logout links
+[x] Only logged in users can ask questions/upvote answers
 [ ] questions#index checks for params[:user_id]
 [ ] questiones#show view displayes form to create
 [ ] answers#create creates new Answer and redirects to questions#show

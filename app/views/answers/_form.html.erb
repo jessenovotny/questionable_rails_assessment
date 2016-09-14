@@ -1,0 +1,10 @@
+<%= form_for(answer, url: question_answers_path(question)) do |f| %>
+
+  <div class="field-with-errors">
+    <%= text_area_tag 'answer[content]', "Write your answer here:",rows: 4, cols: 40%>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Answer Question" %>
+  </div>
+<% end %>

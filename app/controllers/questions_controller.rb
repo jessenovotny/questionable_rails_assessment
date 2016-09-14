@@ -3,7 +3,14 @@ class QuestionsController < ApplicationController
 
 
   def index
-    @questions = Question.all
+    if params[:user_id]
+      @user = User.find(params[:user_id]) 
+      @questions = @user.questions
+    else
+      @questions = Question.all
+    end
+    # binding.pry
+    
   end
 
 

@@ -1,0 +1,18 @@
+<p><strong>Question by:</strong> <%= @question.asker.username %>
+</p>
+
+<h2><%= @question.content %></h2>
+Edit your answer:
+<%#= render 'form', locals: {question: @question, answer: @answer} %>
+
+<%= form_for(@answer, url: question_answer_path(@question), method: :put) do |f| %>
+
+  <div class="field-with-errors">
+    <%= text_area_tag 'answer[content]', "#{@answer.content}", rows: 4, cols: 40 %>
+    <%= hidden_field_tag 'answer[question_id]', @question.id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Update your Answer" %>
+  </div>
+<% end %>

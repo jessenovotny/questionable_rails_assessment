@@ -1,5 +1,10 @@
 class AnswersController < ApplicationController
 
+  def index
+    @user = User.find(params[:user_id])
+    @answers = @user.answers
+  end
+
   def new
     @question = Question.find(params[:question_id])
     if current_user == @question.asker

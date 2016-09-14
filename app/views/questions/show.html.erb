@@ -22,7 +22,7 @@
 <ul>
 <% @question.sort_answers_by_upvotes.each do |answer| %>
   <li> 
-    <div><strong><%= answer.user.username %>:</strong></div>
+    <div><strong><%= link_to "#{answer.user.username}", user_answers_path(answer.user) %>:</strong></div>
     <%= answer.content %>
     <% if logged_in? && current_user != answer.user %>
       <%= button_to "Upvote | #{answer.upvote_count}", answer_upvotes_path(answer) %>

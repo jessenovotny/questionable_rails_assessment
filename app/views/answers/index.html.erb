@@ -1,0 +1,9 @@
+<h1>Showing <%= @answers.count %> Answers by <%= @user.username %>:</h1>
+<br>
+<% @answers.each do |answer| %>
+
+  <h3>Q: <%= link_to "#{answer.question.content}", answer.question %></h3>
+  <h4>A: <%= answer.content %></h4>
+  <%= button_to("Upvote | #{answer.upvote_count}", answer_upvotes_path(answer)) %>
+  <br>
+<% end %>
