@@ -1,7 +1,6 @@
 class AnswersController < ApplicationController
 
   def new
-    # binding.pry
     @question = Question.find(params[:question_id])
     if current_user == @question.asker
       flash[:error] = "You cannot answer your own question"
@@ -11,14 +10,14 @@ class AnswersController < ApplicationController
   end
 
   def create
-    # binding.pry
     question = Question.find(params[:question_id])
     params[:answer][:question_id] = question.id
-    # answer = current_user.answers.build(answer_params).save
-    if current_user.answers.build(answer_params).save
+    answer = current_user.answers.build(answer_params)
+    if answer.save
       flash[:notice] = "Answer successfully submitted"
       return redirect_to question_path(question)
     else
+      flash[:error] = answer.errors.messages[:user]
       redirect_to :back
     end
   end
