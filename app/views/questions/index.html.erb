@@ -8,11 +8,5 @@
      <%= button_to "Upvote #{question.top_answer.upvote_count}", answer_upvotes_path(question.top_answer) %>
       
     </div>
-    <% if question.asker == current_user %>
-      <div>
-        <%= link_to 'Edit', edit_user_question_path(current_user, question) %> | 
-        <%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %>  
-      </div>
-    <% end %>
   <% end %>
 </ul>

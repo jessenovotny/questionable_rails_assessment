@@ -1,24 +1,34 @@
-<p>
-  <strong>Question:</strong>
-  <%= @question.content %>
+<p><strong>Question by:</strong> <%= @question.asker.username %>
 </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @question.asker.username %>
-</p>
+<h2><%= @question.content %></h2>
 
-<% @question.sort_answers_by_upvotes.each do |answer| %>
-  
-  
-  <div> 
-    <%# if current_user %>
-      <%= button_to "Upvote #{answer.upvote_count}", answer_upvotes_path(answer) %> | 
-    <%# end %>
-    <%= answer.content %>
+
+<% if @question.asker == current_user %>
+  <div>
+    <%= link_to 'Edit', edit_user_question_path(current_user, @question) %> | 
+    <%= link_to 'Destroy', @question, method: :delete, data: { confirm: 'Are you sure?' } %>  
   </div>
-  <div>Submitted by: <%= answer.user.username %></div>
-  <br>
+<% else %>
+  <p><strong><%= button_to("Answer this question!", url: new_question_answer_path(@question)) %></strong></p>
 <% end %>
 
-<%= link_to 'Edit', edit_user_question_path(current_user, @question) %>
+
+
+<p><strong><%= @question.answers.count %> Answer(s):</strong></p>
+
+<ul>
+<% @question.sort_answers_by_upvotes.each do |answer| %>
+  <li> 
+    <div><strong><%= answer.user.username %>:</strong></div>
+    <%= answer.content %>
+    <% if logged_in? && current_user != answer.user %>
+      <%= button_to "Upvote | #{answer.upvote_count}", answer_upvotes_path(answer) %>
+    <% end %>
+      
+
+  </li>
+  <br>
+<% end %>
+</ul>
+
