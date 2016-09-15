@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   post 'signup' => 'users#create'
   get '/auth/facebook/callback' => 'sessions#create'
 
+  get '/questions/most_recent' => 'questions#index', as: :most_recent_questions
+
   resources :questions, only: [:index, :show] do
     resources :answers, only: [:new, :create, :edit, :update, :destroy]
   end

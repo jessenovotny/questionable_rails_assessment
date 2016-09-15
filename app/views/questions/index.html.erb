@@ -1,5 +1,12 @@
 <h1><%= "All #{@category.name} " if @category %>Questions <%= "by #{@user.username}" if @user %></h1>
+<!-- Sort by Category -->
 
+<%= form_tag("/questions", method: 'get') do %>
+  <%= select_tag "category", options_from_collection_for_select(Category.all, "id", "name"), include_blank: "All Categories" %>
+  <%= button_tag "Newest", value: "newest" %>
+  <%= button_tag "Most Answered", value: "most_answers" %>
+  <%= submit_tag "Filter" %>
+<% end %>
 
 <ul>
   <% @questions.limit(10).each do |question| %>
