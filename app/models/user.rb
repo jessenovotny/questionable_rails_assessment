@@ -8,4 +8,8 @@ class User < ApplicationRecord
   def top_answer
     answers.sort{|a, b| b.upvote_count <=> a.upvote_count}.first
   end
+
+  def sort_answers_by_upvotes
+    answers.sort{|a, b| b.upvote_count <=> a.upvote_count}
+  end
 end

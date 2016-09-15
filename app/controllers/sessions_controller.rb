@@ -20,9 +20,7 @@ class SessionsController < ApplicationController
         return redirect_to :back
       end
     end
-    binding.pry
     login(user)
-    binding.pry
     redirect_to root_path, notice: "Successfully logged in as #{user.username}"
   end
  

@@ -3,9 +3,10 @@ class QuestionsController < ApplicationController
 
 
   def index
-    if params[:user_id]
-      @user = User.find(params[:user_id]) 
+    if @user = User.find_by(id: params[:user_id]) 
       @questions = @user.questions
+    elsif @category = Category.find_by(id: params[:category_id])
+      @questions = @category.questions
     else
       @questions = Question.all
     end    

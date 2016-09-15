@@ -3,4 +3,7 @@ class Category < ApplicationRecord
   has_many :questions, through: :question_categories
 
   validates :name, presence: true, uniqueness: true
+
+  def category_attributes=(attributes_hash)
+  end
 end
