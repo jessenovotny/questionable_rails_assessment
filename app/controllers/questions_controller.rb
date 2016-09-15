@@ -43,8 +43,8 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    binding.pry
     #if params[:question][:content]
+      #make sure question.asker == current_user
 
 
     if @question.update(question_params)
@@ -65,6 +65,6 @@ class QuestionsController < ApplicationController
     end
 
     def question_params
-      params.require(:question).permit(:content, :asker_id)
+      params.require(:question).permit(:content, :asker_id, :category_id, :new_category_attribute => [:name])
     end
 end

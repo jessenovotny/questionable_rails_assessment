@@ -7,7 +7,7 @@ class Category < ApplicationRecord
   def category_attributes=(attributes_hash)
   end
 
-  def all_for question
+  def self.all_for question
     binding.pry
   end
 end

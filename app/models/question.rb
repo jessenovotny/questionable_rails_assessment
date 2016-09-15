@@ -11,6 +11,8 @@ class Question < ApplicationRecord
 
   validates :content, presence: true
 
+  accepts_nested_attributes_for :categories
+
   def top_answer
     answers.sort{|a, b| b.upvote_count <=> a.upvote_count}.first
   end
@@ -21,5 +23,17 @@ class Question < ApplicationRecord
 
   def answer_count
     answers.count
+  end
+
+  def new_category_attribute=(attribute_hash)
+    unless attribute_hash.values[0].empty?
+      attribute_hash.each do |key, value| 
+        categories << Category.find_or_create_by(key.to_sym => value)
+      end
+    end
+  end
+
+  def category_id=(cat_id)
+    categories << Category.find(cat_id) unless cat_id.empty?
   end
 end
