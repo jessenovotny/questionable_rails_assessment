@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   get '/questions/most_recent' => 'questions#index', as: :most_recent_questions
 
-  resources :questions, only: [:index, :show] do
+  resources :questions, only: [:index, :show, :edit, :update, :destroy] do
     resources :answers, only: [:new, :create, :edit, :update, :destroy]
   end
 
@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [] do
-    resources :questions, only: [:index, :new, :create, :edit, :update, :destroy]
+    resources :questions, only: [:index, :new, :create]
     resources :answers, only: [:index]
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

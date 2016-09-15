@@ -44,6 +44,9 @@ class QuestionsController < ApplicationController
 
   def update
     binding.pry
+    #if params[:question][:content]
+
+
     if @question.update(question_params)
       redirect_to @question, notice: 'Question was successfully updated.'
     else

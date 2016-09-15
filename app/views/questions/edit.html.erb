@@ -1,10 +1,11 @@
 <h1>Editing Question</h1>
 
-<%= form_for(@question, url: user_question_path(current_user, @question)) do |f| %>
+<%= form_for(@question, url: question_path(@question)) do |f| %>
 
   <div class="field-with-errors">
     <%= text_area_tag 'question[content]', "Ask your question here:", rows: 5, cols: 30%>
   </div>
+  <%= text_field_tag "question[category_attribute][name]", nil, placeholder: "Create New Category" %>
 
   <div class="actions">
     <%= f.submit %>

@@ -1,6 +1,6 @@
 <h1>New Question</h1>
 
-<%= form_for(question, url: user_questions_path(current_user)) do |f| %>
+<%= form_for(@question, url: user_questions_path(current_user)) do |f| %>
 
   <div class="field-with-errors">
     <%= text_area_tag 'question[content]', "Ask your question here:", rows: 5, cols: 30%>
