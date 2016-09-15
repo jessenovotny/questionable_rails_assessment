@@ -3,17 +3,12 @@ class QuestionsController < ApplicationController
 
 
   def index
-    if @user = User.find_by(id: params[:user_id]) 
-      @questions = @user.questions
-    elsif @category = Category.find_by(id: params[:category_id])
-      @questions = @category.questions
-    else
-      @questions = Question.all
-    end    
+    filter_index_by(params, request)
   end
 
 
   def show
+
   end
 
   def new
@@ -58,15 +53,31 @@ class QuestionsController < ApplicationController
   end
 
   private
-    def set_question
-      @question = Question.find(params[:id])
-    end
 
-    def question_params
-      params.require(:question).permit(:content, :asker_id, :category_name, :category_ids => [], :new_category_name => [:name])
-    end
+  def set_question
+    @question = Question.find(params[:id])
+  end
 
-    def current_users? question
-      question.asker == current_user
-    end
+  def question_params
+    params.require(:question).permit(:content, :asker_id, :category_name, :category_ids => [], :new_category_name => [:name])
+  end
+
+  def current_users? question
+    question.asker == current_user
+  end
+
+  def filter_index_by params, request
+    # binding.pry
+    if @user = User.find_by(id: params[:user_id]) 
+      @questions = @user.questions.take(10)
+    elsif @category = Category.find_by(id: params[:category_id])
+      @questions = @category.questions.take(10)
+    elsif params[:button] == "newest" || request.env["REQUEST_PATH"].include?("most_recent")
+      @questions = Question.newst
+    elsif params[:button] == "most_answers"
+      @questions = Question.most_answers.take(10)
+    else
+      @questions = Question.oldest
+    end  
+  end
 end

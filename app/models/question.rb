@@ -38,4 +38,16 @@ class Question < ApplicationRecord
   def category_name=(cat_name)
     categories << Category.find(cat_name) unless cat_name.empty?
   end
+
+  def self.newst
+    all.reverse.take(10)
+  end
+
+  def self.oldest
+    all.limit(10)
+  end
+
+  def self.most_answers
+    all.sort_by{|q| q.answer_count}.reverse.take(10)
+  end
 end

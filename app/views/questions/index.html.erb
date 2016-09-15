@@ -8,11 +8,11 @@
 <% end %>
 
 <ul>
-  <% @questions.limit(10).each do |question| %>
+  <% @questions.each do |question| %>
     <h3>Q: <%= link_to "#{question.content}", question %></h3>
     <div>
     <% if logged_in? && answered?(question) %>
-    
+
       A: <%= question.top_answer.content %> -- <%= link_to(question.top_answer.user.username, user_answers_path(question.top_answer.user)) %>
       <%= button_to("Upvote | #{question.top_answer.upvote_count}", answer_upvotes_path(question.top_answer)) %>
       
