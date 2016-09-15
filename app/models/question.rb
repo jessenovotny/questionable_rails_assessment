@@ -26,7 +26,7 @@ class Question < ApplicationRecord
   end
 
   def new_category_name=(category_name)
-    categories << Category.find_or_create_by(name: category_name)
+    categories << Category.find_or_create_by(name: category_name) unless category_name.empty?
   end
 
   def category_ids=(cat_ids)

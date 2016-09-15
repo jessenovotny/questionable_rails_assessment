@@ -1,6 +1,6 @@
 <h1>
 <%= "#{@category.name} " if @category %>
-<%= "Newest " if @newest %>
+<%= "Latest " if @newest %>
 <%= "Oldest " if @oldest %>
 <%= "Most Answered" if @most_answered %>
 Questions 
@@ -25,7 +25,7 @@ Questions
       <%= button_to("Upvote | #{question.top_answer.upvote_count}", answer_upvotes_path(question.top_answer)) %>
       
     <% elsif logged_in? %>
-      <%= link_to("Answer this question", new_question_answer_path(question)) %>
+      <%= link_to("Answer this question", new_question_answer_path(question)) unless my_question?(question) %>
     
     <% else %>
       <%= question.top_answer.try(:content) || link_to("Login to Answer this question", login_path) %>

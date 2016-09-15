@@ -3,6 +3,7 @@ class QuestionsController < ApplicationController
 
 
   def index
+    # flash[:error] = []
     filter_index_by(params, request)
   end
 
@@ -61,7 +62,7 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:content, :asker_id, :category_name, :category_ids => [], :new_category_name => [:name])
+    params.require(:question).permit(:content, :asker_id, :category_name, :new_category_name, :category_ids => [])
   end
 
   def current_users? question
@@ -69,7 +70,7 @@ class QuestionsController < ApplicationController
   end
 
   def no_update params
-    params[:category_name].empty?
+    params[:category_name].empty? if params[:category_name]
   end
 
   def filter_index_by params, request

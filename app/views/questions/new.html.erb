@@ -1,16 +1,16 @@
-<h1>New Question</h1>
+<h1>Ask a New Question</h1>
 
 <%= form_for(@question, url: user_questions_path(current_user)) do |f| %>
 
   <div class="field">
-    <%= text_area_tag 'question[content]', "Ask your question here:", rows: 5, cols: 30%>
+    <%= text_area_tag 'question[content]', nil, placeholder: "Ask your question here:", rows: 5, cols: 30%>
   </div>
 
   <div class="checkbox_container">
     <%= collection_check_boxes(:question, :category_ids, Category.all_for(@question), :id, :name) %>
   </div>
 
-  <%= text_field_tag "question[new_category_attribute][name]", nil, placeholder: "Create New Category" %>
+  <%= text_field_tag "question[new_category_name]", nil, placeholder: "Create New Category" %>
 
   <div class="actions">
     <%= f.submit %>
