@@ -43,14 +43,15 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    #if params[:question][:content]
-      #make sure question.asker == current_user
-
-
-    if @question.update(question_params)
-      redirect_to @question, notice: 'Question was successfully updated.'
+    if params[:question][:content] && !current_users?(@question)
+      flash[:error] = "Cannot edit another user's question."
+      redirect_to @question
     else
-      render :edit
+      if @question.update(question_params)
+        redirect_to @question, notice: 'Question was successfully updated.'
+      else
+        render :edit
+      end
     end
   end
 
@@ -66,5 +67,9 @@ class QuestionsController < ApplicationController
 
     def question_params
       params.require(:question).permit(:content, :asker_id, :category_id, :new_category_attribute => [:name])
+    end
+
+    def current_users? question
+      question.asker == current_user
     end
 end
