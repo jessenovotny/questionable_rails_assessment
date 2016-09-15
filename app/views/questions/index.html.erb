@@ -2,9 +2,10 @@
 
 <%= form_tag("/questions", method: 'get') do %>
   <%= select_tag "category", options_from_collection_for_select(Category.all, "id", "name"), include_blank: "All Categories" %>
-  <%= button_tag "Newest", value: "newest" %>
-  <%= button_tag "Most Answered", value: "most_answers" %>
   <%= submit_tag "Filter" %>
+  <%= button_tag("Newest", value: "newest") unless @newest %>
+  <%= button_tag("Oldest", value: "oldest") if @newest %>
+  <%= button_tag "Most Answered", value: "most_answers" %>
 <% end %>
 
 <ul>
