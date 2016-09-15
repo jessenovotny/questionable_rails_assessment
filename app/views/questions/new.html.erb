@@ -9,7 +9,7 @@
   <div class="checkbox_container">
     <%= collection_check_boxes(:question, :category_ids, Category.all_for(@question), :id, :name) %>
   </div>
-
+  <%= hidden_field_tag "question[asker_id]", current_user.id %>
   <%= text_field_tag "question[new_category_name]", nil, placeholder: "Create New Category" %>
 
   <div class="actions">

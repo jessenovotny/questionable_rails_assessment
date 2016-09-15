@@ -1,6 +1,7 @@
 class AnswersController < ApplicationController
 
   before_action :set_answer, only: [:edit, :update, :destroy]
+  before_action :set_question, only: [:new, :edit]
 
   def index
     @user = User.find(params[:user_id])
@@ -8,7 +9,6 @@ class AnswersController < ApplicationController
   end
 
   def new
-    @question = Question.find(params[:question_id])
     if current_user == @question.asker
       flash[:error] = ["You cannot answer your own question"]
       return redirect_to :back
@@ -24,12 +24,11 @@ class AnswersController < ApplicationController
     else
       binding.pry
       flash[:error] = answer.errors.full_messages
-      redirect_to :back
+      render :new
     end
   end
 
   def edit
-    @question = Question.find(params[:question_id])
   end
 
   def update
@@ -56,6 +55,10 @@ class AnswersController < ApplicationController
 
   def set_answer
     @answer = Answer.find(params[:id])
+  end
+
+  def set_question
+    @question = Question.find(params[:question_id])
   end
 
   def current_users? answer

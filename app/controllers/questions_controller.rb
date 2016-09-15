@@ -3,7 +3,6 @@ class QuestionsController < ApplicationController
 
 
   def index
-    # flash[:error] = []
     filter_index_by(params, request)
   end
 
@@ -11,10 +10,7 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    unless current_user == User.find(params[:user_id])
-      flash[:alert] = "You cannot ask questions for another user."
-      return redirect_to root_path
-    end
+    return redirect_to root_path, alert: "You cannot ask questions for another user." unless current_user == User.find(params[:user_id])
     @question = Question.new
   end
 
@@ -22,18 +18,11 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    if current_user == User.find(params[:user_id])
-      params[:question][:asker_id] = current_user.id
-      @question = Question.create(question_params)
-      if @question.valid?
-        return redirect_to @question, notice: 'Question was successfully created.'
-      else
-        flash[:error] = @question.errors.full_messages
-        render :new
-      end
-    else 
-      redirect_to root_path, altert: "You cannot ask questions for another user."
-    end
+    return redirect_to root_path, altert: "You cannot ask questions for another user." unless current_user == User.find(params[:user_id])
+    question = Question.create(question_params)
+    return redirect_to question, notice: 'Question was successfully created.' if question.valid?
+    flash[:error] = question.errors.full_messages
+    render :new
   end
 
   def update
