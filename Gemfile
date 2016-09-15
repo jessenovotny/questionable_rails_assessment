@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'faker'
 gem 'bcrypt'
-gem 'omniauth'
+gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'pry'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

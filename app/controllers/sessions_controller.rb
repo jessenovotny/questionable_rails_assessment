@@ -8,12 +8,11 @@ class SessionsController < ApplicationController
   end
 
   def create
-    binding.pry
     if auth #coming from FB
-      user = User.find_or_create_by(:uid => auth['uid']) do |u|
-        u.name = auth['info']['name']
-        u.email = auth['info']['email']
-      end
+      user = User.find_or_create_by(:uid => auth['uid'])
+      user.username = auth['info']['name']
+      user.password = "password"
+      user.save
     else #coming from login page
       user = User.find_by(username: params[:user][:username])
       unless user && user.authenticate(params[:user][:password])
@@ -21,7 +20,9 @@ class SessionsController < ApplicationController
         return redirect_to :back
       end
     end
+    binding.pry
     login(user)
+    binding.pry
     redirect_to root_path, notice: "Successfully logged in as #{user.username}"
   end
  
