@@ -6,9 +6,7 @@ class QuestionsController < ApplicationController
     filter_index_by(params, request)
   end
 
-
   def show
-
   end
 
   def new
@@ -26,7 +24,6 @@ class QuestionsController < ApplicationController
     if current_user == User.find(params[:user_id])
       params[:question][:asker_id] = current_user.id
       @question = Question.create(question_params)
-      binding.pry
       if @question.valid?
         return redirect_to @question, notice: 'Question was successfully created.'
       else
@@ -39,6 +36,7 @@ class QuestionsController < ApplicationController
   end
 
   def update
+    binding.pry
     if params[:question][:content] && !current_users?(@question)
       flash[:error] = ["Cannot edit another user's question."]
       redirect_to @question
@@ -51,6 +49,7 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
+    return redirect_to questions_path, notice: 'Cannot delete another users question.' unless current_users?(@question)
     @question.destroy
     redirect_to questions_url, notice: 'Question was successfully destroyed.'
   end

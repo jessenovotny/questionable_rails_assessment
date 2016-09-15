@@ -3,7 +3,6 @@
 
 <h2><%= @question.content %></h2>
 Edit your answer:
-<%#= render 'form', locals: {question: @question, answer: @answer} %>
 
 <%= form_for(@answer, url: question_answer_path(@question), method: :put) do |f| %>
 
@@ -16,3 +15,4 @@ Edit your answer:
     <%= f.submit "Update your Answer" %>
   </div>
 <% end %>
+<%= button_to "Delete Answer", question_answer_path(@question, @answer), method: :delete, data: { confirm: 'Are you sure?' } %>
