@@ -5,8 +5,13 @@
 <% @question.categories.each do |category| %>
   <%= link_to category.name, category_questions_path(category) %> | 
 <% end %>
-<!-- Drop down list of Categories to add as new category -->
 
+<!-- Drop down list of Categories to add as new category -->
+<%= form_for(@question, url: user_question_path(current_user, @question)) do |f| %>
+<%= select_tag "category", options_from_collection_for_select(Category.all, "id", "name"), include_blank: "Add a Category" %>
+<%= text_field_tag "category[name]", nil, placeholder: "Create New Category" %>
+<%= submit_tag "Add Categories" %>
+<% end %>
 
 <h2><%= @question.content %></h2>
 
@@ -22,9 +27,7 @@
   <%= button_to "Answer this question!", new_question_answer_path(@question), method: :get %>
 <% end %>
 
-
-
-<p><strong><%= @question.answers.count %> Answer(s):</strong></p>
+<h3><%= @question.answers.count %> Answer(s):</h3>
 
 <ul>
 <% @question.sort_answers_by_upvotes.each do |answer| %>

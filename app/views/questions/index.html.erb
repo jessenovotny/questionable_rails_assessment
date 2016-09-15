@@ -1,5 +1,4 @@
 <h1><%= "All #{@category.name} " if @category %>Questions <%= "by #{@user.username}" if @user %></h1>
-<!-- Sort by Category -->
 
 <%= form_tag("/questions", method: 'get') do %>
   <%= select_tag "category", options_from_collection_for_select(Category.all, "id", "name"), include_blank: "All Categories" %>
@@ -12,18 +11,17 @@
   <% @questions.limit(10).each do |question| %>
     <h3>Q: <%= link_to "#{question.content}", question %></h3>
     <div>
-    
     <% if logged_in? && answered?(question) %>
+    
       A: <%= question.top_answer.content %> -- <%= link_to(question.top_answer.user.username, user_answers_path(question.top_answer.user)) %>
       <%= button_to("Upvote | #{question.top_answer.upvote_count}", answer_upvotes_path(question.top_answer)) %>
       
     <% elsif logged_in? %>
       <%= link_to("Answer this question", new_question_answer_path(question)) %>
+    
     <% else %>
       <%= question.top_answer.try(:content) || link_to("Login to Answer this question", login_path) %>
-     
     <% end %>
-      
     </div>
     <br>
   <% end %>
