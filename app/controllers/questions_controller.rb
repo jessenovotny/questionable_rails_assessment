@@ -7,6 +7,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
+    @answers = @question.sort_answers_by_upvotes
   end
 
   def new

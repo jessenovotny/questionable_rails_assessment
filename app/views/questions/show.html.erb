@@ -7,40 +7,18 @@
 <% end %>
 
 <!-- Drop down list of Categories to add as new category -->
-<%= form_for(@question, url: question_path(@question)) do |f| %>
-  <%= select_tag "question[category_name]", options_from_collection_for_select(Category.all_for(@question), "id", "name"), include_blank: "Add a Category" %>
-  <%= text_field_tag "question[new_category_name]", nil, placeholder: "Create New Category" %>
-  <%= submit_tag "Add Categories" %>
-<% end %>
+
+<%= render partial: 'question_categories', locals: {question: @question} %>
+
+
 
 <h2><%= @question.content %></h2>
 
-
-<% if my_question?(@question) %>
-  <div>
-    <%= link_to 'Edit', edit_question_path(@question) %> | 
-    <%= link_to 'Destroy', @question, method: :delete, data: { confirm: 'Are you sure?' } %>  
-  </div>
-<% elsif answer = my_answer?(@question) %>
-  <%= button_to "Edit my Answer", edit_question_answer_path(@question, answer), method: :get %>
-<% else %>
-  <%= button_to "Answer this question!", new_question_answer_path(@question), method: :get %>
-<% end %>
+<%= render partial: 'question_options', locals: {question: @question} %>
 
 <h3><%= @question.answer_count %> Answer(s):</h3>
 
 <ul>
-<% @question.sort_answers_by_upvotes.each do |answer| %>
-  <li> 
-    <div><strong><%= link_to "#{answer.user.username}", user_answers_path(answer.user) %>:</strong></div>
-    <%= answer.content %>
-    <% if logged_in? && current_user != answer.user %>
-      <%= button_to "Upvote | #{answer.upvote_count}", answer_upvotes_path(answer) %>
-    <% end %>
-      
-
-  </li>
-  <br>
-<% end %>
+<%= render @answers %>
 </ul>
 
