@@ -1,11 +1,5 @@
-<h1>
-<%= "#{@category.name} " if @category %>
-<%= "Latest " if @newest %>
-<%= "Oldest " if @oldest %>
-<%= "Most Answered" if @most_answered %>
-Questions 
-<%= "by #{@user.username}" if @user %>
-</h1>
+<%= render partial: 'header', locals: {category: @category, newest: @newest, oldest: @oldest, most_answered: @most_answered, user: @user} %>
+
 
 <%= form_tag("/questions", method: 'get') do %>
   <%= select_tag "category_id", options_from_collection_for_select(Category.all, "id", "name"), include_blank: "All Categories" %>
