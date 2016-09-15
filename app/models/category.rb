@@ -8,6 +8,6 @@ class Category < ApplicationRecord
   end
 
   def self.all_for question
-    binding.pry
+    all.map{|category| category unless question.categories.include?(category)}.compact
   end
 end

@@ -8,7 +8,7 @@
 
 <!-- Drop down list of Categories to add as new category -->
 <%= form_for(@question, url: question_path(@question)) do |f| %>
-  <%= select_tag "question[category_id]", options_from_collection_for_select(Category.all, "id", "name"), include_blank: "Add a Category" %>
+  <%= select_tag "question[category_id]", options_from_collection_for_select(Category.all_for(@question), "id", "name"), include_blank: "Add a Category" %>
   <%= text_field_tag "question[new_category_attribute][name]", nil, placeholder: "Create New Category" %>
   <%= submit_tag "Add Categories" %>
 <% end %>

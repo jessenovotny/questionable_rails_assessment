@@ -5,7 +5,10 @@
   <div class="field-with-errors">
     <%= text_area_tag 'question[content]', "Ask your question here:", rows: 5, cols: 30%>
   </div>
-  <%= text_field_tag "question[category_attribute][name]", nil, placeholder: "Create New Category" %>
+
+  <%# checkboxes for adding categories %>
+
+  <%= text_field_tag "question[new_category_attribute][name]", nil, placeholder: "Create New Category" %>
 
   <div class="actions">
     <%= f.submit %>
