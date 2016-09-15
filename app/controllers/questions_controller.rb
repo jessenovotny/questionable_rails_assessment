@@ -78,7 +78,7 @@ class QuestionsController < ApplicationController
     elsif @category = Category.find_by(id: params[:category_id])
       @questions = @category.questions.take(10)
     elsif params[:button] == "newest" || request.env["REQUEST_PATH"].include?("most_recent")
-      @questions = Question.newst
+      @questions = Question.newest
       @newest = true
     elsif params[:button] == "most_answers"
       @questions = Question.most_answers.take(10)

@@ -39,7 +39,7 @@ class Question < ApplicationRecord
     categories << Category.find(cat_name) unless cat_name.empty?
   end
 
-  def self.newst
+  def self.newest
     all.reverse.take(10)
   end
 
