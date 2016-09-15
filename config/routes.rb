@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   delete 'logout' => 'sessions#destroy'
   get 'signup' => 'users#new'
   post 'signup' => 'users#create'
-  get '/auth/facebook/callback' => 'sessions#create'
+  get '/auth/twitter/callback' => 'sessions#create'
 
   resources :questions, only: [:index, :show] do
     resources :answers, only: [:new, :create, :edit, :update, :destroy]

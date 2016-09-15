@@ -8,9 +8,7 @@ class QuestionsController < ApplicationController
       @questions = @user.questions
     else
       @questions = Question.all
-    end
-    # binding.pry
-    
+    end    
   end
 
 
