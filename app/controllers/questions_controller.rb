@@ -36,12 +36,12 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    binding.pry
     if params[:question][:content] && !current_users?(@question)
       flash[:error] = ["Cannot edit another user's question."]
       redirect_to @question
     elsif @question.update(question_params)
-      redirect_to @question, notice: 'Question was successfully updated.'
+      flash[:notice] = 'Question was successfully updated.' unless no_update(question_params)
+      redirect_to @question
     else
       flash[:error] = @question.errors.full_messages
       render :edit
@@ -66,6 +66,10 @@ class QuestionsController < ApplicationController
 
   def current_users? question
     question.asker == current_user
+  end
+
+  def no_update params
+    params[:category_name].empty?
   end
 
   def filter_index_by params, request
