@@ -1,9 +1,7 @@
 class SessionsController < ApplicationController
 
   def new
-    if logged_in?
-      return redirect_to root_path 
-    end
+    return redirect_to root_path if logged_in?
     @user = User.new
   end
 
