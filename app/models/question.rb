@@ -47,7 +47,7 @@ class Question < ApplicationRecord
     all.limit(10)
   end
 
-  def self.most_answers
+  def self.most_answered
     all.sort_by{|q| q.answer_count}.reverse.take(10)
   end
 end

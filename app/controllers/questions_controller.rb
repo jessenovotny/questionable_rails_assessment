@@ -80,8 +80,9 @@ class QuestionsController < ApplicationController
     elsif params[:button] == "newest" || request.env["REQUEST_PATH"].include?("most_recent")
       @questions = Question.newest
       @newest = true
-    elsif params[:button] == "most_answers"
-      @questions = Question.most_answers.take(10)
+    elsif params[:button] == "most_answered"
+      @most_answered = true
+      @questions = Question.most_answered.take(10)
     else
       @oldest = true
       @questions = Question.oldest
