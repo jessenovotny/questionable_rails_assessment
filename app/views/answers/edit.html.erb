@@ -5,7 +5,8 @@
 
 Edit your answer:
 
-<%= render partial: 'answers/form', locals: {answer: @answer, question: @question} %>
+<!-- How do I render the form to update and create a nested object like answer -->
+<%#= render partial: 'answers/form', locals: {answer: @answer, question: @question} %>
 
 <%= form_for(@answer, url: question_answer_path(@question), method: :put) do |f| %>
 

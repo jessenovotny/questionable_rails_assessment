@@ -18,27 +18,18 @@ class AnswersController < ApplicationController
 
   def create
     answer = current_user.answers.build(answer_params)
-    if answer.save
-      flash[:notice] = "Answer successfully submitted"
-      return redirect_to question_path(answer.question)
-    else
-      binding.pry
-      flash[:error] = answer.errors.full_messages
-      render :new
-    end
+    return redirect_to question_path(answer.question), notice: "Answer successfully submitted" if answer.save
+    flash[:error] = answer.errors.full_messages
+    render :new
   end
 
   def edit
   end
 
   def update
-    if @answer.update(answer_params)
-      flash[:notice] = "Answer successfully updated"
-      return redirect_to question_path(@answer.question)
-    else
-      flash[:error] = @answer.errors.full_messages
-      redirect_to :back
-    end
+    return redirect_to question_path(@answer.question), notice: "Answer successfully updated" if @answer.update(answer_params)
+    flash[:error] = @answer.errors.full_messages
+    redirect_to :back
   end
 
   def destroy
