@@ -91,3 +91,16 @@ div {
 label {
   display: block;
 }
+
+.checkbox_container {
+  display: inline-block;
+  vertical-align: -1px;
+  margin: 5px;
+ }
+.checkbox_container input {
+  display: inline;
+ }
+.checkbox_container label{
+  display: inline;
+  margin-right: 15px;
+ }

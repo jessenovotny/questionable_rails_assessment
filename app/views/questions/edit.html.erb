@@ -1,12 +1,18 @@
 <h1>Editing Question</h1>
 
+<p><strong>Categories:</strong>
+<% @question.categories.each do |category| %>
+  <%= link_to category.name, category_questions_path(category) %> | 
+<% end %>
+
 <%= form_for(@question, url: question_path(@question)) do |f| %>
 
   <div class="field-with-errors">
     <%= text_area_tag 'question[content]', "Ask your question here:", rows: 5, cols: 30%>
   </div>
-
-  <%# checkboxes for adding categories %>
+  <div class="checkbox_container">
+    <%= collection_check_boxes(:question, :category_ids, Category.all_for(@question), :id, :name) %>
+  </div>
 
   <%= text_field_tag "question[new_category_attribute][name]", nil, placeholder: "Create New Category" %>
 
