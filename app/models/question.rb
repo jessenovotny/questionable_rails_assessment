@@ -25,12 +25,8 @@ class Question < ApplicationRecord
     answers.count
   end
 
-  def new_category_attribute=(attribute_hash)
-    unless attribute_hash.values[0].empty?
-      attribute_hash.each do |key, value| 
-        categories << Category.find_or_create_by(key.to_sym => value)
-      end
-    end
+  def new_category_name=(category_name)
+    categories << Category.find_or_create_by(name: category_name)
   end
 
   def category_id=(cat_id)

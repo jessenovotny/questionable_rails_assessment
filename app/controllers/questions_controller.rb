@@ -46,12 +46,10 @@ class QuestionsController < ApplicationController
     if params[:question][:content] && !current_users?(@question)
       flash[:error] = "Cannot edit another user's question."
       redirect_to @question
+    elsif @question.update(question_params)
+      redirect_to @question, notice: 'Question was successfully updated.'
     else
-      if @question.update(question_params)
-        redirect_to @question, notice: 'Question was successfully updated.'
-      else
-        render :edit
-      end
+      render :edit
     end
   end
 
@@ -66,7 +64,7 @@ class QuestionsController < ApplicationController
     end
 
     def question_params
-      params.require(:question).permit(:content, :asker_id, :category_id, :new_category_attribute => [:name])
+      params.require(:question).permit(:content, :asker_id, :category_id, :new_category_name, :new_category_attribute => [:name])
     end
 
     def current_users? question
