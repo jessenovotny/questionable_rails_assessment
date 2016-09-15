@@ -29,7 +29,13 @@ class Question < ApplicationRecord
     categories << Category.find_or_create_by(name: category_name)
   end
 
-  def category_id=(cat_id)
-    categories << Category.find(cat_id) unless cat_id.empty?
+  def category_ids=(cat_ids)
+    cat_ids.each do |cat_id|
+      categories << Category.find(cat_id) unless cat_id.empty?
+    end
+  end
+
+  def category_name=(cat_name)
+    categories << Category.find(cat_name) unless cat_name.empty?
   end
 end

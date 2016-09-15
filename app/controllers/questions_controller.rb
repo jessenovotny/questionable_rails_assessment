@@ -3,7 +3,6 @@ class QuestionsController < ApplicationController
 
 
   def index
-    binding.pry
     if @user = User.find_by(id: params[:user_id]) 
       @questions = @user.questions
     elsif @category = Category.find_by(id: params[:category_id])
@@ -64,7 +63,7 @@ class QuestionsController < ApplicationController
     end
 
     def question_params
-      params.require(:question).permit(:content, :asker_id, :category_id, :new_category_name, :new_category_attribute => [:name])
+      params.require(:question).permit(:content, :asker_id, :category_name, :category_ids => [], :new_category_name => [:name])
     end
 
     def current_users? question
