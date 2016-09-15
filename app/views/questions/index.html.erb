@@ -1,10 +1,16 @@
-<h1><%= "All #{@category.name} " if @category %>Questions <%= "by #{@user.username}" if @user %></h1>
+<h1>
+<%= "#{@category.name} " if @category %>
+<%= "Newest " if @newest %>
+<%= "Oldest " if @oldest %>
+Questions 
+<%= "by #{@user.username}" if @user %>
+</h1>
 
 <%= form_tag("/questions", method: 'get') do %>
-  <%= select_tag "category", options_from_collection_for_select(Category.all, "id", "name"), include_blank: "All Categories" %>
+  <%= select_tag "category_id", options_from_collection_for_select(Category.all, "id", "name"), include_blank: "All Categories" %>
   <%= submit_tag "Filter" %>
-  <%= button_tag("Newest", value: "newest") unless @newest %>
   <%= button_tag("Oldest", value: "oldest") if @newest %>
+  <%= button_tag("Newest", value: "newest") if @oldest %>
   <%= button_tag "Most Answered", value: "most_answers" %>
 <% end %>
 

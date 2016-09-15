@@ -78,6 +78,7 @@ class QuestionsController < ApplicationController
     elsif params[:button] == "most_answers"
       @questions = Question.most_answers.take(10)
     else
+      @oldest = true
       @questions = Question.oldest
     end  
   end
