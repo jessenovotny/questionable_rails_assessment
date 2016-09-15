@@ -9,7 +9,7 @@ class Question < ApplicationRecord
 
   has_many :upvotes
 
-  validates :content, presence: true
+  validates_presence_of :content, :message => "Question cannot be blank" 
 
   accepts_nested_attributes_for :categories
 

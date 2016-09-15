@@ -26,9 +26,11 @@ class QuestionsController < ApplicationController
     if current_user == User.find(params[:user_id])
       params[:question][:asker_id] = current_user.id
       @question = Question.create(question_params)
+      binding.pry
       if @question.valid?
         return redirect_to @question, notice: 'Question was successfully created.'
       else
+        flash[:error] = @question.errors.full_messages
         render :new
       end
     else 
@@ -38,11 +40,12 @@ class QuestionsController < ApplicationController
 
   def update
     if params[:question][:content] && !current_users?(@question)
-      flash[:error] = "Cannot edit another user's question."
+      flash[:error] = ["Cannot edit another user's question."]
       redirect_to @question
     elsif @question.update(question_params)
       redirect_to @question, notice: 'Question was successfully updated.'
     else
+      flash[:error] = @question.errors.full_messages
       render :edit
     end
   end
@@ -67,7 +70,6 @@ class QuestionsController < ApplicationController
   end
 
   def filter_index_by params, request
-    # binding.pry
     if @user = User.find_by(id: params[:user_id]) 
       @questions = @user.questions.take(10)
     elsif @category = Category.find_by(id: params[:category_id])

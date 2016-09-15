@@ -20,7 +20,8 @@ class AnswersController < ApplicationController
       flash[:notice] = "Answer successfully submitted"
       return redirect_to question_path(answer.question)
     else
-      flash[:error] = answer.errors.messages[:user]
+      binding.pry
+      flash[:error] = answer.errors.full_messages
       redirect_to :back
     end
   end
@@ -36,7 +37,7 @@ class AnswersController < ApplicationController
       flash[:notice] = "Answer successfully updated"
       return redirect_to question_path(answer.question)
     else
-      flash[:error] = answer.errors.messages[:user]
+      flash[:error] = answer.errors.full_messages
       redirect_to :back
     end
   end

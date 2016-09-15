@@ -21,6 +21,7 @@ class UsersController < ApplicationController
       login(@user)
       redirect_to root_path, notice: 'User was successfully created.'
     else
+      flash[:error] = @user.errors.full_messages
       render :new
     end
   end
