@@ -18,15 +18,21 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    return redirect_to root_path, altert: "You cannot ask questions for another user." unless current_user == User.find(params[:user_id])
-    question = Question.create(question_params)
-    return redirect_to question, notice: 'Question was successfully created.' if question.valid?
-    flash[:error] = question.errors.full_messages
+    return redirect_to root_path, alert: "You cannot ask questions for another user." unless current_user == User.find(params[:user_id])
+    @question = Question.create(question_params)
+    return redirect_to @question, notice: 'Question was successfully created.' if @question.valid?
+    flash[:error] = @question.errors.full_messages
     render :new
   end
 
   def update
-    if params[:question][:content] && !my_question?(@question)
+    # binding.pry
+    if @question = Question.find_by(id: params[:question_id])
+      @question.categories.delete(Category.find(params[:id]))
+      redirect_to :back
+
+
+    elsif params[:question][:content] && !my_question?(@question)
       flash[:error] = ["Cannot edit another user's question."]
       redirect_to @question
     elsif @question.update(question_params)

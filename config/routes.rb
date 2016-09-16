@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   get '/questions/most_recent' => 'questions#index', as: :most_recent_questions
 
+  put '/questions/:question_id/categories/:id' => 'questions#update', as: :question_category
+
   resources :questions, only: [:index, :show, :edit, :update, :destroy] do
     resources :answers, only: [:new, :create, :edit, :update, :destroy]
   end

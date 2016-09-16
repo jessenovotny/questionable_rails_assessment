@@ -1,6 +1,6 @@
 module QuestionsHelper
 
-  def my_answer_to question
+  def user_has_already_answered question
     question.answers.where("user_id = ?", current_user.id).try(:first)
   end
 
