@@ -8,8 +8,9 @@
 <%= form_for(@question, url: question_path(@question)) do |f| %>
 
   <div class="field-with-errors">
-    <%= text_area_tag 'question[content]', nil, placeholder: "#{@question.content}", rows: 5, cols: 30%>
+    <%= text_area_tag 'question[content]', "#{@question.content}", rows: 5, cols: 30%>
   </div>
+
   <div class="checkbox_container">
     <%= collection_check_boxes(:question, :category_ids, Category.all_for(@question), :id, :name) %>
   </div>
@@ -19,6 +20,7 @@
   <div class="actions">
     <%= f.submit %>
   </div>
+  
 <% end %>
 
 <%= link_to 'Show', @question %> |

@@ -26,12 +26,9 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    # binding.pry
-    if @question = Question.find_by(id: params[:question_id])
-      @question.categories.delete(Category.find(params[:id]))
+    if question = Question.find_by(id: params[:question_id])
+      question.categories.delete(Category.find(params[:id]))
       redirect_to :back
-
-
     elsif params[:question][:content] && !my_question?(@question)
       flash[:error] = ["Cannot edit another user's question."]
       redirect_to @question
