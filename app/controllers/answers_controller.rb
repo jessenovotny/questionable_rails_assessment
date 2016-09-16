@@ -5,7 +5,7 @@ class AnswersController < ApplicationController
 
   def index
     @user = User.find(params[:user_id])
-    @answers = @user.sort_answers_by_upvotes
+    @answers = @user.answers_sorted_by_upvotes
   end
 
   def new

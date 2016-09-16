@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @answers = @question.sort_answers_by_upvotes
+    @answers = @question.answers_sorted_by_upvotes
   end
 
   def new
@@ -71,7 +71,7 @@ class QuestionsController < ApplicationController
       @newest = true
     elsif params[:button] == "most_answered"
       @most_answered = true
-      @questions = Question.most_answered.take(10)
+      @questions = Question.most_answered
     else
       @oldest = true
       @questions = Question.oldest

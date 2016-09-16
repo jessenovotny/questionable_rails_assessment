@@ -17,7 +17,7 @@ class Question < ApplicationRecord
     answers.sort{|a, b| b.upvote_count <=> a.upvote_count}.first
   end
 
-  def sort_answers_by_upvotes
+  def answers_sorted_by_upvotes
     answers.sort{|a, b| b.upvote_count <=> a.upvote_count}
   end
 

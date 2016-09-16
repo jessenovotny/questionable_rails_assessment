@@ -10,6 +10,6 @@ class User < ApplicationRecord
   end
 
   def answers_sorted_by_upvotes
-    answers.sort_by{|answer| answer.upvote_count }.reverse
+    answers.sort{|a, b| b.upvote_count <=> a.upvote_count}
   end
 end
