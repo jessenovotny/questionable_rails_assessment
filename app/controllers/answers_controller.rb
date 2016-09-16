@@ -33,7 +33,7 @@ class AnswersController < ApplicationController
   end
 
   def destroy
-    return redirect_to questions_path, notice: 'Cannot delete another users answer.' unless current_users?(@answer)
+    return redirect_to questions_path, notice: 'Cannot delete another users answer.' unless my_answer?(@answer)
     @answer.destroy
     redirect_to questions_path, notice: 'Answer was successfully destroyed.'
   end
@@ -50,10 +50,6 @@ class AnswersController < ApplicationController
 
   def set_question
     @question = Question.find(params[:question_id])
-  end
-
-  def current_users? answer
-    answer.user == current_user
   end
 end
 

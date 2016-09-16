@@ -1,16 +1,6 @@
-<p><strong>Question by:</strong> <%= @question.asker.username %>
-</p>
-<p><strong>Categories:</strong>
-
-<% @question.categories.each do |category| %>
-  <%= link_to category.name, category_questions_path(category) %> | 
-<% end %>
-
-<!-- Drop down list of Categories to add as new category -->
+<p><strong>Question by:</strong> <%= @question.asker.username %></p>
 
 <%= render partial: 'question_categories', locals: {question: @question} %>
-
-
 
 <h2><%= @question.content %></h2>
 

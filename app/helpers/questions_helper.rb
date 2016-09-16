@@ -1,9 +1,5 @@
 module QuestionsHelper
 
-  def my_question? question
-    question.asker == current_user
-  end
-
   def my_answer_to question
     question.answers.where("user_id = ?", current_user.id).try(:first)
   end

@@ -1,7 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
 
-
   def index
     filter_index_by(params, request)
   end
@@ -27,7 +26,7 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    if params[:question][:content] && !current_users?(@question)
+    if params[:question][:content] && !my_question?(@question)
       flash[:error] = ["Cannot edit another user's question."]
       redirect_to @question
     elsif @question.update(question_params)
@@ -40,7 +39,7 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    return redirect_to questions_path, notice: 'Cannot delete another users question.' unless current_users?(@question)
+    return redirect_to questions_path, notice: 'Cannot delete another users question.' unless my_question?(@question)
     @question.destroy
     redirect_to questions_url, notice: 'Question was successfully destroyed.'
   end
@@ -53,10 +52,6 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question).permit(:content, :asker_id, :category_name, :new_category_name, :category_ids => [])
-  end
-
-  def current_users? question
-    question.asker == current_user
   end
 
   def no_update params
