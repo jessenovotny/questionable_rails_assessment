@@ -1,5 +1,5 @@
-<%= render partial: 'header', locals: {category: @category, newest: @newest, oldest: @oldest, most_answered: @most_answered, user: @user} %>
+<%= render partial: 'header', locals: {filter: @filter} %>
 
-<%= render partial: 'filters', locals: {newest: @newest, oldest: @oldest, most_answered: @most_answered} %>
+<%= render partial: 'filters', locals: {filter: @filter} %>
 
 <%= render @questions %>

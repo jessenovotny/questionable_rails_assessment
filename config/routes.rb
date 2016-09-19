@@ -10,7 +10,8 @@ Rails.application.routes.draw do
 
   get '/questions/most_recent' => 'questions#index', as: :most_recent_questions
 
-  put '/questions/:question_id/categories/:id' => 'questions#update', as: :question_category
+  put '/categories/:category_id/questions/:id' => 'questions#update', as: :question_category
+
 
   resources :questions, only: [:index, :show, :edit, :update, :destroy] do
     resources :answers, only: [:new, :create, :edit, :update, :destroy]
@@ -28,7 +29,6 @@ Rails.application.routes.draw do
     resources :questions, only: [:index, :new, :create]
     resources :answers, only: [:index]
   end
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root 'questions#index'
 end

@@ -12,6 +12,7 @@ class QuestionsController < ApplicationController
   def new
     return redirect_to root_path, alert: "You cannot ask questions for another user." unless current_user == User.find(params[:user_id])
     @question = Question.new
+    2.times {@question.categories.build}
   end
 
   def edit
@@ -19,22 +20,23 @@ class QuestionsController < ApplicationController
 
   def create
     return redirect_to root_path, alert: "You cannot ask questions for another user." unless current_user == User.find(params[:user_id])
-    @question = Question.create(question_params)
-    return redirect_to @question, notice: 'Question was successfully created.' if @question.valid?
+    # binding.pry
+    @question = current_user.questions.build(question_params)
+    return redirect_to @question, notice: 'Question was successfully created.' if @question.save
     flash[:error] = @question.errors.full_messages
     render :new
   end
 
   def update
-    if question = Question.find_by(id: params[:question_id])
-      question.categories.delete(Category.find(params[:id]))
+    if category = Category.find_by(id: params[:category_id])
+      # in questions#show, click current category link to remove from categories #
+      @question.categories.delete(category) 
       redirect_to :back
-    elsif params[:question][:content] && !my_question?(@question)
+    elsif !my_question?(@question)
       flash[:error] = ["Cannot edit another user's question."]
       redirect_to @question
     elsif @question.update(question_params)
-      flash[:notice] = 'Question was successfully updated.' unless no_update(question_params)
-      redirect_to @question
+      redirect_to @question, notice: 'Question was successfully updated.'
     else
       flash[:error] = @question.errors.full_messages
       render :edit
@@ -54,26 +56,21 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:content, :asker_id, :category_name, :new_category_name, :category_ids => [])
-  end
-
-  def no_update params
-    params[:category_name].empty? if params[:category_name]
+    params.require(:question).permit(:content, :categories_attributes => [:name] , :category_ids => [])
   end
 
   def filter_index_by params, request
-    if @user = User.find_by(id: params[:user_id]) 
-      @questions = @user.questions.take(10)
-    elsif @category = Category.find_by(id: params[:category_id])
+    if @category = Category.find_by(id: params[:category_id])
       @questions = @category.questions.take(10)
+      @filter = "category"
     elsif params[:button] == "newest" || request.env["REQUEST_PATH"].include?("most_recent")
+      @filter = "newest"
       @questions = Question.newest
-      @newest = true
     elsif params[:button] == "most_answered"
-      @most_answered = true
+      @filter = "most answered"
       @questions = Question.most_answered
     else
-      @oldest = true
+      @filter = "oldest"
       @questions = Question.oldest
     end  
   end

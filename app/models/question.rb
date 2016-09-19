@@ -1,13 +1,10 @@
 class Question < ApplicationRecord
   belongs_to :asker, class_name: 'User'
-
+  has_many :answers
+  has_many :upvotes
+  
   has_many :question_categories
   has_many :categories, through: :question_categories
-  
-  has_many :answers
-  has_many :respondents, through: :answers, class_name: 'User'
-
-  has_many :upvotes
 
   validates_presence_of :content, :message => "Question cannot be blank" 
 
@@ -25,18 +22,13 @@ class Question < ApplicationRecord
     answers.count
   end
 
-  def new_category_name=(category_name)
-    categories << Category.find_or_create_by(name: category_name) unless category_name.empty?
-  end
-
-  def category_ids=(cat_ids)
-    cat_ids.each do |cat_id|
-      categories << Category.find(cat_id) unless cat_id.empty?
+  def categories_attributes=(category_hash)
+    category_hash.values.each do |attribute|
+      unless attribute.values.first.empty?
+        category = Category.find_or_create_by(attribute)
+        categories << category unless categories.include?(category)
+      end
     end
-  end
-
-  def category_name=(cat_name)
-    categories << Category.find(cat_name) unless cat_name.empty?
   end
 
   def self.newest

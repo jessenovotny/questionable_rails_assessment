@@ -13,7 +13,7 @@ class AnswersController < ApplicationController
       flash[:error] = ["You cannot answer your own question"]
       return redirect_to :back
     end
-    @answer = Answer.new
+    @answer = @question.answers.build
   end
 
   def create
