@@ -1,0 +1,11 @@
+<li> 
+  <div><strong>
+    <%= link_to "#{answer.user.username}", user_answers_path(answer.user) %>:
+  </strong></div>
+
+  <%= answer.content %>
+  
+  <%= button_to("Upvote | #{answer.upvote_count}", answer_upvotes_path(answer)) if logged_in? %>
+
+</li>
+<br>

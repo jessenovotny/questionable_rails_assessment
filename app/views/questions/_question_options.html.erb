@@ -1,0 +1,16 @@
+<% if my_question?(question) %>
+
+  <div>
+    <%= link_to 'Edit', edit_question_path(question) %> | 
+    <%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %>  
+  </div>
+
+<% elsif answer = user_has_already_answered(question) %>
+
+  <%= button_to "Edit my Answer", edit_question_answer_path(question, answer), method: :get %>
+
+<% else %>
+
+  <%= button_to "Answer this question!", new_question_answer_path(question), method: :get %>
+
+<% end %>
