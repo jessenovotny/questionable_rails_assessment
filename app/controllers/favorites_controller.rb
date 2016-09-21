@@ -1,7 +1,6 @@
 class FavoritesController < ApplicationController
 
   def index
-    # binding.pry
     @user = User.find(params[:user_id])
     @questions = @user.favorited_questions
   end
