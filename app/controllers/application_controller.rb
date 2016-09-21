@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  helper_method :current_user, :logged_in?, :my_answer?, :my_question?
+  helper_method :current_user, :logged_in?, :my_answer?, :my_question?, :favorited
 
   def logged_in?
     true if current_user
@@ -20,6 +20,10 @@ class ApplicationController < ActionController::Base
 
   def my_question? question
     question.asker == current_user
+  end
+
+  def favorited question
+    Favorite.find_by(question_id: question.id, user_id: current_user.id) ? "<3" : "Favorite"
   end
 
 end

@@ -27,16 +27,16 @@ Question.all.each do |question|
   10.times do
     question.answers.build(content: Faker::Hacker.say_something_smart, user_id: rand(1..10)).save if rand(1..3).odd?
   end
-end
 
-### SEED UPVOTES PER ANSWER OF TOP SEARCH RESULT FILTERS ####
-Question.all.each do |question| 
   question.answers.each do |answer| 
     10.times do 
       answer.upvotes.build(voter_id: User.find_by(id: rand(1..30)).id).save if rand(1..2).odd?
     end
   end
 end
+
+### SEED UPVOTES PER ANSWER OF TOP SEARCH RESULT FILTERS ####
+
 
 # 100.times do
 #   Question.oldest.each{|question| question.answers.each{|answer| answer.upvotes.build(voter_id: User.find_by(id: rand(1..20)).id).save}}

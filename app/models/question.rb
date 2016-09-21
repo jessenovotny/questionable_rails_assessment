@@ -2,6 +2,7 @@ class Question < ApplicationRecord
   belongs_to :asker, class_name: 'User'
   has_many :answers
   has_many :upvotes
+  has_many :favorites
   
   has_many :question_categories
   has_many :categories, through: :question_categories
@@ -23,8 +24,8 @@ class Question < ApplicationRecord
   end
 
   def category_dropdown=(id)
-    category = Category.find(id)
-    categories << category unless categories.include?(category)
+    category = Category.find_by(id: id)
+    categories << category unless categories.include?(category) || category.nil?
   end
 
   def categories_attributes=(category_hash)
@@ -46,5 +47,9 @@ class Question < ApplicationRecord
 
   def self.most_answered
     all.sort_by{|q| q.answer_count}.reverse.take(10)
+  end
+
+  def self.favorited
+
   end
 end

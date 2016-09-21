@@ -2,6 +2,8 @@ class User < ApplicationRecord
   has_many :questions, foreign_key: 'asker_id'
   has_many :answers
   has_many :upvotes, foreign_key: 'voter_id'
+  has_many :favorites
+
   validates :username, presence: true, uniqueness: true
   has_secure_password
 

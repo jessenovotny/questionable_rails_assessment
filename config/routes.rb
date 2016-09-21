@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   resources :questions, only: [:index, :show, :edit, :update, :destroy] do
     resources :answers, only: [:new, :create, :edit, :update, :destroy]
+    resources :favorites, only: [:create]
   end
 
   resources :categories, only: [] do
@@ -22,7 +23,7 @@ Rails.application.routes.draw do
   end
 
   resources :answer, only: [] do
-    resources :upvotes, only: [:create, :destroy]
+    resources :upvotes, only: [:create]
   end
 
   resources :users, only: [] do

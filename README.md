@@ -23,17 +23,13 @@ Things you may want to cover:
 
 * ...
 
+include a solid readme with the following parameters:
+- application description
+- simple installation guide
+- contributor's guide
+- link to the licensing files
 
-[x] Homepage lists all questions
-[x] Navbar has login/signup or welcome <name>/logout links
-[x] Only logged in users can ask questions/upvote answers
-[ ] questions#index checks for params[:user_id]
-[ ] questiones#show view displayes form to create
-[ ] answers#create creates new Answer and redirects to questions#show
-[ ] questiones#show view displayes all answers
-[ ] ApplicationController has current_user
-[ ] SessionsController can login and logout user
-[ ] Error message for username that is not unique
-[ ] Errors duplicated after new question created
-[ ] 
-[ ] 
+[] join table favorites. with user_id and question_id
+[] favorite model and controller create favorite
+
+[] button on view to favorite. 
