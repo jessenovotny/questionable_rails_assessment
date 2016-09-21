@@ -6,7 +6,7 @@
 
 <%= form_for(question, url: question_path(question)) do |f| %>
   
-  <%= select_tag "question[category_name]", options_from_collection_for_select(Category.all_for(question), "id", "name"), include_blank: "Add a Category" %>
+  <%= select_tag "question[category_dropdown]", options_from_collection_for_select(Category.all_for(question), "id", "name"), include_blank: "Add a Category" %>
   
   <%= f.fields_for :categories, @question.categories.build do |categories_fields|  %>
     <%= categories_fields.text_field :name, placeholder: "Create New Category" %>

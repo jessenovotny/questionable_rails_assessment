@@ -20,7 +20,6 @@ class QuestionsController < ApplicationController
 
   def create
     return redirect_to root_path, alert: "You cannot ask questions for another user." unless current_user == User.find(params[:user_id])
-    # binding.pry
     @question = current_user.questions.build(question_params)
     return redirect_to @question, notice: 'Question was successfully created.' if @question.save
     flash[:error] = @question.errors.full_messages
@@ -56,7 +55,7 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:content, :categories_attributes => [:name] , :category_ids => [])
+    params.require(:question).permit(:content, :category_dropdown, :categories_attributes => [:name] , :category_ids => [])
   end
 
   def filter_index_by params, request

@@ -22,6 +22,11 @@ class Question < ApplicationRecord
     answers.count
   end
 
+  def category_dropdown=(id)
+    category = Category.find(id)
+    categories << category unless categories.include?(category)
+  end
+
   def categories_attributes=(category_hash)
     category_hash.values.each do |attribute|
       unless attribute.values.first.empty?
