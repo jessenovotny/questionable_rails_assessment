@@ -8,7 +8,7 @@
     
     <%= button_to("Upvote | #{question.top_answer.upvote_count}", answer_upvotes_path(question.top_answer), form_class: "upvote-favorite") %>
 
-    <%= button_to "#{question.favorited_by?(current_user))}", question_favorites_path(question), form_class: "upvote-favorite" %>
+    <%= button_to "#{question.favorited_by?(current_user)}", question_favorites_path(question), form_class: "upvote-favorite" %>
     
     
   <% elsif logged_in? %>
