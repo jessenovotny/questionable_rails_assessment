@@ -32,7 +32,7 @@ class QuestionsController < ApplicationController
       # in questions#show, click current category link to remove from categories #
       @question.categories.delete(category) 
       redirect_to :back
-    elsif !my_question?(@question)
+    elsif params[:question][:content] && !my_question?(@question)
       flash[:error] = ["Cannot edit another user's question."]
       redirect_to @question
     elsif @question.update(question_params)
