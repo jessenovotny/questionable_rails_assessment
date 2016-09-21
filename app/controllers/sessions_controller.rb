@@ -8,10 +8,11 @@ class SessionsController < ApplicationController
   def create
     if auth #coming from FB
       binding.pry
-      user = User.find_or_create_by(:uid => auth['uid'])
-      user.username = auth['info']['name']
+      user = User.find_or_create_by(:uid => auth[:uid])
+      user.username = auth[:info][:name]
       user.password = "password"
-      unless user.save
+      user.save
+      unless user.valid?
         flash[:errors] = user.errors.full_messages
         return redirect_to root_path
       end
