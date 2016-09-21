@@ -7,11 +7,11 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    User.find_by(id: session[:uid])
+    User.find_by(id: session[:id])
   end
 
   def login(user)
-    session[:uid] = user.id
+    session[:id] = user.id
   end
 
   def my_answer? answer

@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       user = User.find_or_create_by(:uid => auth['uid'])
       user.username = auth['info']['name']
       user.password = "password"
-      user.save
+      return redirect_to root_path, notice: 'Error logging in through Facebook' unless user.save
     else #coming from login page
       user = User.find_by(username: params[:user][:username])
       unless user && user.authenticate(params[:user][:password])
