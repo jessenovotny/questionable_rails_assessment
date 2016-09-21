@@ -1,19 +1,19 @@
 ### SEED CATEGORIES ####
 
-5.times do
+10.times do
   Category.create(name: Faker::Book.genre)
 end
 
 ### SEED USERS ####
 
-5.times do
+10.times do
   User.create(username: Faker::Internet.user_name, password: "password")
 end
 
 ### SEED QUESTIONS PER USER ####
 
-20.times do
-  User.find(rand(1..5)).questions.build(content: Faker::StarWars.quote).save
+30.times do
+  User.find(rand(1..10)).questions.build(content: Faker::StarWars.quote).save
 end
 
 ### SEED CATEGORIES & ANSWERS PER QUESTION ####
