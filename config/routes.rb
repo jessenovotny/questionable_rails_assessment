@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     resources :upvotes, only: [:create]
   end
 
-  resources :users, only: [] do
+  resources :users, only: [:destroy] do
     resources :questions, only: [:index, :new, :create]
     resources :answers, only: [:index]
     resources :favorites, only: [:index]

@@ -2,3 +2,5 @@
 <br>
 
 <%= render @questions %>
+
+<%= link_to("Delete Account", user_path(current_user), method: 'delete') if current_user == @user %>
