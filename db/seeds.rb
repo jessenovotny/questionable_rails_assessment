@@ -20,7 +20,7 @@ end
 
 Question.all.each do |question|
   6.times do
-    category = Category.find_by(rand(1..10))
+    category = Category.find_by(id: rand(1..10))
     question.categories << category unless question.categories.include?(category) || category.nil? || rand(1..3).even?
   end
 
