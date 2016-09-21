@@ -1,4 +1,5 @@
 <h1>Showing <%= @answers.count %> Answers by <%= @user.username %>:</h1>
+<%= link_to("See Your Favorited Questions", user_favorites_path(@user)) if @user == current_user %>
 <br>
 <% @answers.each do |answer| %>
 
