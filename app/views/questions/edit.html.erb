@@ -15,9 +15,7 @@
     <%= collection_check_boxes(:question, :category_ids, Category.all_for(@question), :id, :name) %>
   </div>
 
-  <%#= text_field_tag "question[new_category_name]", nil, placeholder: "Create New Category" %>
-
-  <%= f.fields_for :categories, @question.categories.build do |categories_fields|  %>
+  <%= f.fields_for :categories, @question.categories.build do |categories_fields| %>
     <%= categories_fields.text_field :name, placeholder: "Create New Category" %>
   <% end %>
 
@@ -26,6 +24,3 @@
   </div>
   
 <% end %>
-
-<%= link_to 'Show', @question %> |
-<%= link_to 'Back', questions_path %>

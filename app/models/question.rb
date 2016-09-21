@@ -37,6 +37,10 @@ class Question < ApplicationRecord
     end
   end
 
+  def favorited_by? current_user
+    Favorite.find_by(question_id: self.id, user_id: current_user.id) ? "<3" : "Favorite"
+  end
+
   def self.newest
     all.reverse.take(10)
   end

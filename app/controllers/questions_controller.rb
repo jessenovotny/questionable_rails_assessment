@@ -27,7 +27,6 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    # binding.pry
     if category = Category.find_by(id: params[:category_id])
       # in questions#show, click current category link to remove from categories #
       @question.categories.delete(category) 
