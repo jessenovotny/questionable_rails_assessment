@@ -22,4 +22,8 @@ class ApplicationController < ActionController::Base
     question.asker == current_user
   end
 
+  def favorited? question
+    Favorite.find_by(question_id: question.id, user_id: current_user.id) ? "<3" : "Favorite"
+  end
+
 end
