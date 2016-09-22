@@ -14,7 +14,8 @@ Rails.application.routes.draw do
 
   get '/questions/most_recent' => 'questions#index', as: :most_recent_questions
   get '/questions/most_popular' => 'questions#index', as: :most_popular_questions
-  get '/questions/best_answers' => 'questions#index', as: :best_answers
+  get '/questions/top_answers' => 'questions#index', as: :top_answers
+  get '/questions/oldest' => 'questions#index', as: :oldest_questions
 
   put '/categories/:category_id/questions/:id' => 'questions#update', as: :question_category
 

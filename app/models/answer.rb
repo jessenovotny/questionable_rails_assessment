@@ -22,4 +22,8 @@ class Answer < ApplicationRecord
     upvotes.count
   end
 
+  def self.most_upvoted
+    all.sort_by{|a| a.upvote_count }.reverse.take(10)
+  end
+
 end

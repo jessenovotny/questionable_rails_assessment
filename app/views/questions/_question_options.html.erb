@@ -7,7 +7,7 @@
 
 <% else %>
 
-<%= button_to "#{question.favorited_by?(current_user)}", question_favorites_path(question), form_class: "inline_button" %>
+<%= button_to "#{question.favorited_by?(current_user)} | #{question.favorite_count}", question_favorites_path(question), form_class: "inline_button" %>
 
   <% if answer = user_has_already_answered(question) %>
 

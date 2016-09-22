@@ -12,18 +12,6 @@ class Question < ApplicationRecord
 
   accepts_nested_attributes_for :categories
 
-  def top_answer
-    answers.sort{|a, b| b.upvote_count <=> a.upvote_count}.first
-  end
-
-  def answers_sorted_by_upvotes
-    answers.sort{|a, b| b.upvote_count <=> a.upvote_count}
-  end
-
-  def answer_count
-    answers.count
-  end
-
   def category_dropdown=(id)
     category = Category.find_by(id: id)
     categories << category unless categories.include?(category) || category.nil?
@@ -38,8 +26,24 @@ class Question < ApplicationRecord
     end
   end
 
+  def top_answer
+    answers.sort{|a, b| b.upvote_count <=> a.upvote_count}.first
+  end
+
+  def answers_sorted_by_upvotes
+    answers.sort{|a, b| b.upvote_count <=> a.upvote_count}
+  end
+
+  def answer_count
+    answers.count
+  end
+
+  def favorite_count
+    favorites.count
+  end
+
   def favorited_by? current_user
-    Favorite.find_by(question_id: self.id, user_id: current_user.id) ? "<3" : "Favorite"
+    Favorite.find_by(question_id: self.id, user_id: current_user.id) ? "  <3  " : "Favorite"
   end
 
   def self.newest
@@ -47,18 +51,18 @@ class Question < ApplicationRecord
   end
 
   def self.most_popular
-    all.sort_by{|q| q.favorites.count}.reverse.take(10)
+    all.sort_by{|q| q.favorite_count}.reverse.take(10)
   end
 
   def self.oldest
     all.limit(10)
   end
 
-  def self.most_answered
-    all.sort_by{|q| q.answer_count}.reverse.take(10)
-  end
+  # def self.most_answered
+  #   all.sort_by{|q| q.answer_count}.reverse.take(10)
+  # end
 
-  def self.favorited
-
+  def self.top_answers
+    Answer.most_upvoted.map{|a| a.question}
   end
 end
