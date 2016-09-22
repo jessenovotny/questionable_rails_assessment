@@ -31,6 +31,10 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    @user.questions.destroy_all
+    @user.answers.destroy_all
+    @user.upvotes.destroy_all
+    @user.favorites.destroy_all
     @user.destroy
     redirect_to root_path, notice: 'User was successfully destroyed.'
   end
