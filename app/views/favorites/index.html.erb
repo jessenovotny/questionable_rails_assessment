@@ -3,4 +3,4 @@
 
 <%= render @questions %>
 
-<%= link_to("Delete Account", user_path(current_user), method: 'delete') if current_user == @user %>
+<%= link_to("Delete Account", user_path(current_user), method: 'delete', data: { confirm: 'Are you sure?' }) if current_user == @user %>

@@ -1,8 +1,8 @@
 <% if my_question?(question) %>
 
   <div>
-    <%= link_to 'Edit', edit_question_path(question) %> | 
-    <%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %>  
+    <%= link_to 'Edit', edit_user_question_path(current_user, question) %> | 
+    <%= link_to 'Destroy', user_question_path(current_user, question), method: :delete, data: { confirm: 'Are you sure?' } %>  
   </div>
 
 <% elsif answer = user_has_already_answered(question) %>

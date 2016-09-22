@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
   
+  root 'questions#index'
 
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
-  delete 'logout' => 'sessions#destroy'
+
   get 'signup' => 'users#new'
   post 'signup' => 'users#create'
+
+  delete 'logout' => 'sessions#destroy'
+  
   get '/auth/facebook/callback' => 'sessions#create'
 
   get '/questions/most_recent' => 'questions#index', as: :most_recent_questions
@@ -13,13 +17,9 @@ Rails.application.routes.draw do
   put '/categories/:category_id/questions/:id' => 'questions#update', as: :question_category
 
 
-  resources :questions, only: [:index, :show, :edit, :update, :destroy] do
+  resources :questions, only: [:index, :show] do
     resources :answers, only: [:new, :create, :edit, :update, :destroy]
     resources :favorites, only: [:create]
-  end
-
-  resources :categories, only: [] do
-    resources :questions, only: [:index]
   end
 
   resources :answer, only: [] do
@@ -27,10 +27,9 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:destroy] do
-    resources :questions, only: [:index, :new, :create]
+    resources :questions, only: [:new, :create, :edit, :update, :destroy]
     resources :answers, only: [:index]
     resources :favorites, only: [:index]
   end
 
-  root 'questions#index'
 end
