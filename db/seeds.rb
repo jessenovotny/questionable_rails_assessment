@@ -46,6 +46,7 @@ end
 
 Answer.all.each do |answer|
   rand(1..15).times do 
-    answer.upvotes.build(voter_id: User.find_by(id: rand(1..30)).id).save
+    user_id = User.find_by(id: rand(1..40)).try(:id)
+    answer.upvotes.build(voter_id: user_id).save
   end
 end
