@@ -1,15 +1,15 @@
-<h3>Q: <%= link_to "#{question.content}", question %></h3>
+<h3 id="question">Q: <%= link_to "#{question.content}", question %></h3>
+
+<%= button_to "#{question.favorited_by?(current_user)}", question_favorites_path(question), form_class: "inline_button" if logged_in? %>
+
 <div>
 
-  <% if logged_in? && answered?(question) %>
+  <% if answered?(question) %>
+    
     <div>
-      A: <%= question.top_answer.content %> -- <%= link_to(question.top_answer.user.username, user_answers_path(question.top_answer.user)) %>
+      <p id="answer">A: <%= question.top_answer.content %> -- <%= link_to(question.top_answer.user.username, user_answers_path(question.top_answer.user)) %></p>
+      <%= button_to("Upvote | #{question.top_answer.upvote_count}", answer_upvotes_path(question.top_answer), form_class: "upvote-favorite") %>
     </div>
-    
-    <%= button_to("Upvote | #{question.top_answer.upvote_count}", answer_upvotes_path(question.top_answer), form_class: "upvote-favorite") %>
-
-    <%= button_to "#{question.favorited_by?(current_user)}", question_favorites_path(question), form_class: "upvote-favorite" %>
-    
     
   <% elsif logged_in? %>
     
@@ -17,9 +17,10 @@
   
   <% else %>
 
-    <%= "A: #{question.top_answer.try(:content)}" || link_to("Login to Answer this question", login_path) %>
+    <%= link_to("Login to Answer this question", login_path) %>
   
   <% end %>
 
 </div>
+
 <br>

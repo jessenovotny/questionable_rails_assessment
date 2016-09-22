@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get '/auth/facebook/callback' => 'sessions#create'
 
   get '/questions/most_recent' => 'questions#index', as: :most_recent_questions
+  get '/questions/most_popular' => 'questions#index', as: :most_popular_questions
+  get '/questions/best_answers' => 'questions#index', as: :best_answers
 
   put '/categories/:category_id/questions/:id' => 'questions#update', as: :question_category
 

@@ -9,6 +9,6 @@
 <h3><%= @question.answer_count %> Answer(s):</h3>
 
 <ul>
-<%= render @answers %>
+<%= render partial: "question_answers", locals: {answers: @answers} %>
 </ul>
 

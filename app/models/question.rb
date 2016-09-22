@@ -8,6 +8,7 @@ class Question < ApplicationRecord
   has_many :categories, through: :question_categories
 
   validates_presence_of :content, :message => "Question cannot be blank" 
+  validates_uniqueness_of :content, :message => "Question has already been asked" 
 
   accepts_nested_attributes_for :categories
 
@@ -43,6 +44,10 @@ class Question < ApplicationRecord
 
   def self.newest
     all.reverse.take(10)
+  end
+
+  def self.most_popular
+    all.sort_by{|q| q.favorites.count}.reverse.take(10)
   end
 
   def self.oldest

@@ -19,4 +19,5 @@ class User < ApplicationRecord
   def answers_sorted_by_upvotes
     answers.sort{|a, b| b.upvote_count <=> a.upvote_count}
   end
+
 end

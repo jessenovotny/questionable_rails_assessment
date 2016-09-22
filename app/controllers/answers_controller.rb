@@ -6,6 +6,8 @@ class AnswersController < ApplicationController
   def index
     @user = User.find(params[:user_id])
     @answers = @user.answers_sorted_by_upvotes
+    # @questions = @user.answers_sorted_by_upvotes.map{|answer| answer.question }
+    # binding.pry
   end
 
   def new

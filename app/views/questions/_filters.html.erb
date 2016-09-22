@@ -1,7 +1,8 @@
-<%= form_tag("/questions", method: 'get') do %>
+<%= form_tag("/questions", method: 'get', class: "inline_button") do %>
   <%= select_tag "category_id", options_from_collection_for_select(Category.all, "id", "name"), include_blank: "All Categories" %>
   <%= submit_tag "Filter" %>
-  <%= button_tag("Oldest", value: "oldest") unless filter == "oldest" %>
-  <%= button_tag("Newest", value: "newest") unless filter == "newest" %>
-  <%= button_tag "Most Answered", value: "most_answered" unless filter == "most answered" %>
 <% end %>
+  <%#= button_tag("Oldest", value: "oldest") unless filter == "oldest" %>
+  <%= button_to("Newest", most_recent_questions_path, form_class: "inline_button") unless filter == "newest" %>
+  <%= button_to("Top Answers", best_answers_path, form_class: "inline_button") unless filter == "best answers" %>
+  <%= button_to("Most Popular", most_popular_questions_path, form_class: "inline_button") unless filter == "most popular" %>

@@ -105,6 +105,17 @@ label {
   margin-right: 15px;
  }
 
- .upvote-favorite {
+ .inline_button {
   display: inline;
+ }
+
+ #question {
+  margin-bottom: 5px;
+ }
+
+ #answer {
+  padding: 0px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  margin-left: 0px;
  }

@@ -1,0 +1,12 @@
+<% answers.each do |answer| %>
+  <% question = answer.question %>
+  <h3 id="question">Q: <%= link_to "#{question.content}", question %></h3>
+    <%= button_to("#{question.favorited_by?(current_user)}", question_favorites_path(question), form_class: "inline_button") if logged_in? %>
+    
+    <div>
+      <p id="answer">A: <%= answer.content %></p>
+    </div>
+    
+    <%= button_to("Upvote | #{answer.upvote_count}", answer_upvotes_path(answer), form_class: "upvote-favorite") if logged_in? %>
+  <br>
+<% end %>

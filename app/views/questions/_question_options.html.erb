@@ -5,12 +5,18 @@
     <%= link_to 'Destroy', user_question_path(current_user, question), method: :delete, data: { confirm: 'Are you sure?' } %>  
   </div>
 
-<% elsif answer = user_has_already_answered(question) %>
-
-  <%= button_to "Edit my Answer", edit_question_answer_path(question, answer), method: :get %>
-
 <% else %>
 
-  <%= button_to "Answer this question!", new_question_answer_path(question), method: :get %>
+<%= button_to "#{question.favorited_by?(current_user)}", question_favorites_path(question), form_class: "inline_button" %>
 
+  <% if answer = user_has_already_answered(question) %>
+
+    <%= button_to "Edit my Answer", edit_question_answer_path(question, answer), method: :get, form_class: "inline_button" %>
+
+  <% else %>
+
+    <%= button_to "Answer this question!", new_question_answer_path(question), method: :get, form_class: "inline_button" %>
+
+  <% end %>
 <% end %>
+
