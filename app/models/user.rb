@@ -13,7 +13,7 @@ class User < ApplicationRecord
   end
 
   def favorited_questions
-    favorites.map{|favorite| favorite.question}
+    favorites.map{|favorite| favorite.question}.compact
   end
 
   def answers_sorted_by_upvotes
