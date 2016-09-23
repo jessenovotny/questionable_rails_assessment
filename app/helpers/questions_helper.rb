@@ -1,7 +1,6 @@
 module QuestionsHelper
 
   def user_has_already_answered question
-    # binding.pry
     current_user ? question.answers.where("user_id = ?", current_user.id).try(:first) : nil
   end
 
