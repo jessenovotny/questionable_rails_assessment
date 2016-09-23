@@ -2,10 +2,10 @@
 
 <p><strong>Categories:</strong>
 <% @question.categories.each do |category| %>
-  <%= link_to category.name, category_questions_path(category) %> | 
+  <%= link_to category.name, question_category_path(category, @question), method: :put %> | 
 <% end %>
 
-<%= form_for(@question, url: question_path(@question)) do |f| %>
+<%= form_for(@question, url: user_question_path(current_user), method: 'put') do |f| %>
 
   <div class="field-with-errors">
     <%= text_area_tag 'question[content]', "#{@question.content}", rows: 5, cols: 30%>
@@ -20,7 +20,7 @@
   <% end %>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Update Question" %>
   </div>
   
 <% end %>

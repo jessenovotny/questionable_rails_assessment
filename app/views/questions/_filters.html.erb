@@ -3,6 +3,6 @@
   <%= submit_tag "Filter" %>
 <% end %>
   <%= button_to("Oldest", oldest_questions_path, form_class: "inline_button", method: :get) unless filter == "oldest" %>
-  <%= button_to("Newest", most_recent_questions_path, form_class: "inline_button", method: :get) unless filter == "newest" %>
-  <%= button_to("Top Answers", top_answers_path, form_class: "inline_button", method: :get) unless filter == "top answers" %>
-  <%= button_to("Most Popular", most_popular_questions_path, form_class: "inline_button", method: :get) unless filter == "most popular" %>
+  <%= button_to("Newest", most_recent_questions_path, form_class: "inline_button", method: :get) unless filter == "most_recent" %>
+  <%= button_to("Top Answers", top_answers_path, form_class: "inline_button", method: :get) unless filter == "top_answers" %>
+  <%= button_to("Most Popular", most_popular_questions_path, form_class: "inline_button", method: :get) unless filter == "most_popular" %>

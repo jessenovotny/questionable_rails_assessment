@@ -7,15 +7,19 @@
 
 <% else %>
 
-<%= button_to "#{question.favorited_by?(current_user)} | #{question.favorite_count}", question_favorites_path(question), form_class: "inline_button" %>
+<%= button_to "#{question.favorited_by?(current_user)} | #{question.favorite_count}", question_favorites_path(question), form_class: "inline_button" if logged_in? %>
 
   <% if answer = user_has_already_answered(question) %>
 
     <%= button_to "Edit my Answer", edit_question_answer_path(question, answer), method: :get, form_class: "inline_button" %>
 
-  <% else %>
+  <% elsif logged_in? %>
 
     <%= button_to "Answer this question!", new_question_answer_path(question), method: :get, form_class: "inline_button" %>
+
+  <% else %>
+
+    <%= button_to "Login to answer this question!", login_path, method: :get, form_class: "inline_button" %>
 
   <% end %>
 <% end %>

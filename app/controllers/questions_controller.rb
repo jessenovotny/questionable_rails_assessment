@@ -2,8 +2,8 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
 
   def index
-    request_path = request.env["REQUEST_PATH"]
-    filter_index_by(params, request_path)
+    path = request.env["REQUEST_PATH"].split("/").last
+    filter_index_by(params, path)
   end
 
   def show
@@ -59,21 +59,21 @@ class QuestionsController < ApplicationController
     params.require(:question).permit(:content, :category_dropdown, :categories_attributes => [:name] , :category_ids => [])
   end
 
-  def filter_index_by params, request_path
+  def filter_index_by params, path
     if @category = Category.find_by(id: params[:category_id])
       @questions = @category.questions.take(10)
       @filter = "category"
-    elsif request_path.include?("most_recent")
-      @filter = "newest"
+    elsif path == "most_recent"
+      @filter = path
       @questions = Question.newest
-    elsif request_path.include?("top_answers")
-      @filter = "top answers"
+    elsif path == "top_answers"
+      @filter = path
       @questions = Question.top_answers
-    elsif request_path.include?("oldest")
-      @filter = "oldest"
+    elsif path == "oldest"
+      @filter = path
       @questions = Question.oldest
     else
-      @filter = "most popular"
+      @filter = "most_popular"
       @questions = Question.most_popular
     end  
   end
