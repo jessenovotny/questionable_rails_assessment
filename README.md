@@ -24,6 +24,7 @@ You may also run the application locally by running the following commands in yo
 4. `rails s`
 
 In your browser, navigate to http://localhost:3000/
+Be aware that Facebook login will not function locally since my Facebook app ID and secret are not public on the remote repo. 
 
 
 ## CONTRIBUTOR'S GUIDE ##
