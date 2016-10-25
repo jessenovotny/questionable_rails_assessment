@@ -1,15 +1,15 @@
+<div>
 <h3 id="question">Q: <%= link_to "#{question.content}", question %></h3>
 
-<%= button_to "#{question.favorited_by?(current_user)} | #{question.favorite_count}", question_favorites_path(question), form_class: "inline_button" if logged_in? %>
+<%= render partial: "favorites/favorite_button", locals: {question: question} %>
+</div>
 
-<div>
 
   <% if answered?(question) %>
     
     <div>
-      <p id="answer">A: <%= question.top_answer.content %> -- <%= link_to(question.top_answer.user.username, user_answers_path(question.top_answer.user)) %></p>
-      <%#= button_to("Upvote | #{question.top_answer.upvote_count}", answer_upvotes_path(question.top_answer), form_class: "upvote") %>
-      <%= render partial: "upvotes/upvote", locals: {answer: question.top_answer} %>
+      <p id="answer">A: <a href="#" class="js-more-answer" data-id="<%= question.top_answer.id %>" ><%= truncate question.top_answer.content, length: 45 %></a> -- <%= link_to(question.top_answer.user.username, user_answers_path(question.top_answer.user)) %></p>
+      <%= render partial: "upvotes/upvote_button", locals: {answer: question.top_answer} %>
     </div>
     
   <% elsif logged_in? %>
@@ -22,6 +22,5 @@
   
   <% end %>
 
-</div>
 
 <br>

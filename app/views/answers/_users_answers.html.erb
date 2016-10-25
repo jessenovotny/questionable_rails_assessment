@@ -2,13 +2,13 @@
   <% question = answer.question %>
   <h3 id="question">Q: <%= link_to "#{question.content}", question %></h3>
     
-    <%= button_to("#{question.favorited_by?(current_user)} | #{question.favorite_count}", question_favorites_path(question), form_class: "inline_button") if logged_in? %>
-    
+    <%= render partial: "favorites/favorite_button", locals: {question: question} %>
+
     <div>
       <p id="answer">A: <%= answer.content %></p>
     </div>
     
-    <%= render partial: "upvotes/upvote", locals: {answer: answer} %>
+    <%= render partial: "upvotes/upvote_button", locals: {answer: answer} %>
 
   <br>
 <% end %>

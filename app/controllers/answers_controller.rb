@@ -8,6 +8,14 @@ class AnswersController < ApplicationController
     @answers = @user.answers_sorted_by_upvotes
   end
 
+  def show
+    set_answer
+    respond_to do |format|
+      format.html {redirect_to :back}
+      format.json {render json: @answer}
+    end
+  end
+
   def new
     if current_user == @question.asker
       flash[:error] = ["You cannot answer your own question"]

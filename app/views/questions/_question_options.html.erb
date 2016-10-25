@@ -7,7 +7,7 @@
 
 <% else %>
 
-<%= button_to "#{question.favorited_by?(current_user)} | #{question.favorite_count}", question_favorites_path(question), form_class: "inline_button" if logged_in? %>
+<%= render partial: "favorites/favorite_button", locals: {question: question} %>
 
   <% if logged_in? %>
     <% if answer = user_has_already_answered(question) %>

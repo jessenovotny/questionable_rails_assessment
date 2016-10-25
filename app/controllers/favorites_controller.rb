@@ -6,9 +6,12 @@ class FavoritesController < ApplicationController
   end
 
   def create
-    question = Question.find(params[:question_id])
-    favorite = question.favorites.build(user_id: current_user.id)
-    Favorite.find_by(id: favorite.errors.messages[:question]).try(:delete) unless favorite.save
-    redirect_to :back
+    if current_user
+      question = Question.find(params[:question_id])
+      favorite = question.favorites.build(user_id: current_user.id)
+      Favorite.find_by(question_id: question.id, user_id: current_user.id).try(:delete) unless favorite.save
+      # binding.pry
+      render json: favorite
+    end
   end
 end
