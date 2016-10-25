@@ -25,7 +25,7 @@ Rails.application.routes.draw do
     resources :favorites, only: [:create]
   end
 
-  resources :answer, only: [] do
+  resources :answers, only: [] do
     resources :upvotes, only: [:create]
   end
 

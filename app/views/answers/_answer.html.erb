@@ -5,7 +5,7 @@
 
   <%= answer.content %>
   
-  <%= button_to("Upvote | #{answer.upvote_count}", answer_upvotes_path(answer)) if logged_in? %>
+  <%= render partial: "upvotes/upvote", locals: {answer: answer} %>
 
 </li>
 <br>

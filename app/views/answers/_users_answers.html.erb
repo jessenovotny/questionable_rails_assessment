@@ -8,6 +8,7 @@
       <p id="answer">A: <%= answer.content %></p>
     </div>
     
-    <%= button_to("Upvote | #{answer.upvote_count}", answer_upvotes_path(answer), form_class: "upvote-favorite") if logged_in? %>
+    <%= render partial: "upvotes/upvote", locals: {answer: answer} %>
+
   <br>
 <% end %>
