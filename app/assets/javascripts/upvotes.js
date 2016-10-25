@@ -4,10 +4,7 @@ $(function(){
     event.preventDefault();
     var path = event.target.getAttribute('action');
     $.post(path, function(data) {
-      debugger;
-      $('form.answer-' + data.answer_id)
-      
+      $('form.answer-' + data.answer_id + ' :submit').val("Upvote | " + data.answer.upvote_count)
     })
-    // debugger;
   })
 })
