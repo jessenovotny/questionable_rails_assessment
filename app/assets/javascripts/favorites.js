@@ -1,0 +1,1 @@
+// click "Favorite" to create favorite and update favorite count.

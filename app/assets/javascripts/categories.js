@@ -1,0 +1,1 @@
+// click to add/remove categories
