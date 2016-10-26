@@ -19,7 +19,6 @@ Rails.application.routes.draw do
 
   put '/categories/:category_id/questions/:id' => 'questions#update', as: :question_category
 
-
   resources :questions, only: [:index, :show] do
     resources :answers, only: [:new, :create, :edit, :update, :destroy]
     resources :favorites, only: [:create]

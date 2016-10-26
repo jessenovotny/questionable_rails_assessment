@@ -11,6 +11,7 @@
     <%= f.label :password %>
     <%= f.text_field :password %>
   </div>
+    <%= f.hidden_field(:referral_path, value: @referral_path) if @referral_path %>
 
   <div class="actions">
     <%= f.submit "Login!" %>

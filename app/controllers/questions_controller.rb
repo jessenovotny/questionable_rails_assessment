@@ -2,7 +2,8 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
 
   def index
-    path = request.env["REQUEST_PATH"].split("/").last
+    path = request.env["REQUEST_PATH"]
+    path = path.split("/").last unless path == "/"
     filter_index_by(params, path)
   end
 
@@ -61,7 +62,7 @@ class QuestionsController < ApplicationController
 
   def filter_index_by params, path
     if @category = Category.find_by(id: params[:category_id])
-      @questions = @category.questions.take(10)
+      @questions = @category.questions
       @filter = "category"
     elsif path == "most_recent"
       @filter = path

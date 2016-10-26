@@ -6,9 +6,7 @@
 
 <%= render partial: 'question_options', locals: {question: @question} %>
 
-<h3><%= @question.answer_count %> Answer(s):</h3>
-
-<ul>
+<ul class="question_answers">
 <%= render partial: "question_answers", locals: {answers: @answers} %>
 </ul>
 

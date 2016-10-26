@@ -1,13 +1,14 @@
 class SessionsController < ApplicationController
 
   def new
+    @referral_path = request.env["HTTP_REFERER"]
+    # binding.pry
     return redirect_to root_path if logged_in?
     @user = User.new
   end
 
   def create
     if auth #coming from FB
-      # binding.pry
       user = User.find_or_create_by(:uid => auth[:uid])
       user.username = auth[:info][:name]
       user.password = "password"
@@ -24,7 +25,8 @@ class SessionsController < ApplicationController
       end
     end
     login(user)
-    redirect_to root_path, notice: "Successfully logged in as #{user.username}"
+    referral_path = params[:user][:referral_path]
+    redirect_to referral_path || root_path, notice: "Successfully logged in as #{user.username}"
   end
  
   def destroy

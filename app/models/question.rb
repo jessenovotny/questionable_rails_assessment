@@ -46,23 +46,25 @@ class Question < ApplicationRecord
     Favorite.find_by(question_id: self.id, user_id: current_user.try(:id)) ? "  <3  " : "Favorite"
   end
 
+  ### FILTERS ###
   def self.newest
-    all.reverse.take(10)
+    questions = order(:id).take(10)
+    # Kaminari.paginate_array(questions).page(page)
   end
 
   def self.most_popular
-    all.sort_by{|q| q.favorite_count}.reverse.take(10)
+    # binding.pry
+    questions = all.sort_by{|q| q.favorite_count}.reverse.take(10)
+    # Kaminari.paginate_array(questions).page(page)
   end
 
   def self.oldest
-    all.limit(10)
+    questions = order(id: :desc).take(10)
+    # Kaminari.paginate_array(questions).page(page)
   end
 
-  # def self.most_answered
-  #   all.sort_by{|q| q.answer_count}.reverse.take(10)
-  # end
-
   def self.top_answers
-    Answer.most_upvoted.map{|a| a.question}
+    questions = Answer.select("answers.*, count(upvotes.id) as upvote_count").joins(:upvotes).group(:id).order('upvote_count DESC').map{|a| a.question}.take(10)
+    # Kaminari.paginate_array(questions).page(page)
   end
 end

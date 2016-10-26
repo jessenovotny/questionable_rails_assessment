@@ -1,5 +1,5 @@
 class AnswersController < ApplicationController
-
+  # respond_to :html, :js, :erb, :json
   before_action :set_answer, only: [:edit, :update, :destroy]
   before_action :set_question, only: [:new, :edit]
 
@@ -22,13 +22,20 @@ class AnswersController < ApplicationController
       return redirect_to :back
     end
     @answer = @question.answers.build
+    render partial: 'answers/form', locals: {answer: @answer, question: @question}
   end
 
   def create
     answer = current_user.answers.build(answer_params)
-    return redirect_to question_path(answer.question), notice: "Answer successfully submitted" if answer.save
-    flash[:error] = answer.errors.full_messages
-    render :new
+    # binding.pry
+    if answer.save
+      @answers = answer.question.answers
+      render partial: "questions/question_answers", locals: {answers: @answers}
+    else
+    # return redirect_to question_path(answer.question), notice: "Answer successfully submitted" if answer.save
+      flash[:error] = answer.errors.full_messages
+      render :back
+    end
   end
 
   def edit
@@ -43,7 +50,7 @@ class AnswersController < ApplicationController
   def destroy
     return redirect_to questions_path, notice: 'Cannot delete another users answer.' unless my_answer?(@answer)
     @answer.destroy
-    redirect_to questions_path, notice: 'Answer was successfully destroyed.'
+    redirect_to :back, notice: 'Answer was successfully destroyed.'
   end
 
   private
