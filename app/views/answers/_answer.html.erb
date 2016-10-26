@@ -3,7 +3,7 @@
     <%= link_to "#{answer.user.username}", user_answers_path(answer.user) %>:
   </strong></div>
 
-  <%= answer.content %>
+  <a href="#" class="js-more-answer" data-id="<%= answer.id %>"> <%= truncate answer.content, length: 45 %></a>
   
   <%= render partial: "upvotes/upvote_button", locals: {answer: answer} %>
 

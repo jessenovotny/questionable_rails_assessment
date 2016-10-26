@@ -8,7 +8,7 @@
   <% if answered?(question) %>
     
     <div>
-      <p id="answer">A: <a href="#" class="js-more-answer" data-id="<%= question.top_answer.id %>" ><%= truncate question.top_answer.content, length: 45 %></a> -- <%= link_to(question.top_answer.user.username, user_answers_path(question.top_answer.user)) %></p>
+      <p id="answer">A: <a href="#" class="js-more-answer" data-id="<%= question.top_answer.id %>"><%= truncate question.top_answer.content, length: 45 %></a> -- <%= link_to(question.top_answer.user.username, user_answers_path(question.top_answer.user)) %></p>
       <%= render partial: "upvotes/upvote_button", locals: {answer: question.top_answer} %>
     </div>
     

@@ -5,7 +5,7 @@
     <%= render partial: "favorites/favorite_button", locals: {question: question} %>
 
     <div>
-      <p id="answer">A: <%= answer.content %></p>
+      <p id="answer">A: <a href="#" class="js-more-answer" data-id="<%= answer.id %>" ><%= truncate answer.content, length: 45 %></a></p>
     </div>
     
     <%= render partial: "upvotes/upvote_button", locals: {answer: answer} %>
