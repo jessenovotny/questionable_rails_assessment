@@ -1,5 +1,4 @@
 class AnswersController < ApplicationController
-  # respond_to :html, :js, :erb, :json
   before_action :set_answer, only: [:edit, :update, :destroy]
   before_action :set_question, only: [:new, :edit]
 
@@ -28,10 +27,14 @@ class AnswersController < ApplicationController
   def create
     answer = current_user.answers.build(answer_params)
     if answer.save
-      @answers = answer.question.answers
-      render partial: "questions/question_answers", locals: {answers: @answers}
+      if params[:first]
+        @question = answer.question
+        redirect_to question_path(@question), notice: "Answer successfully submitted"
+      else
+        @answers = answer.question.answers
+        render partial: "questions/question_answers", locals: {answers: @answers}
+      end
     else
-    # return redirect_to question_path(answer.question), notice: "Answer successfully submitted" if answer.save
       flash[:error] = answer.errors.full_messages
       redirect_to :back
     end

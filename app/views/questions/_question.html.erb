@@ -14,9 +14,10 @@
     </div>
     
   <% elsif logged_in? %>
-    
-    
-  <div class="new_answer"><%= link_to("Answer this question", new_question_answer_path(question), class: "new_answer") unless my_question?(question) %></div>
+  
+  <div class="answer_form">
+    <%= button_to("Answer this question!", new_question_answer_path(question), method: :get, form: {class: "inline_button first_answer_button", id: "question-#{question.id}"}) %>
+  </div>
   
   <% else %>
 
