@@ -30,22 +30,28 @@ class QuestionsController < ApplicationController
 
   def update
     # binding.pry
-    if category = Category.find_by(id: params[:category_id])
-      # in questions#show, click current category link to remove from categories #
-      @question.categories.delete(category) 
-      render partial: 'question_categories', locals: {question: @question}
-    elsif !!params[:add_categories]
-      @question.update(question_params)
-      render partial: 'question_categories', locals: {question: @question}
-    elsif @question.update(question_params)
-      # binding.pry
-      redirect_to @question, notice: 'Question was successfully updated.'
-    elsif params[:question][:content] && !my_question?(@question)
-      flash[:error] = ["Cannot edit another user's question."]
-      redirect_to @question
+    if logged_in?
+      if category = Category.find_by(id: params[:category_id])
+        # in questions#show, click current category link to remove from categories #
+        @question.categories.delete(category) 
+        render partial: 'question_categories', locals: {question: @question}
+      elsif !!params[:add_categories]
+        binding.pry
+        @question.update(question_params)
+        render partial: 'question_categories', locals: {question: @question}
+      elsif @question.update(question_params)
+        # binding.pry
+        redirect_to @question, notice: 'Question was successfully updated.'
+      elsif params[:question][:content] && !my_question?(@question)
+        flash[:error] = ["Cannot edit another user's question."]
+        redirect_to @question
+      else
+        flash[:error] = @question.errors.full_messages
+        render :edit
+      end
     else
-      flash[:error] = @question.errors.full_messages
-      render :edit
+      flash[:error] =  "Must be logged in to make changes"
+      redirect_to :back
     end
   end
 

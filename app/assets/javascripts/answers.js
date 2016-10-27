@@ -15,7 +15,7 @@ var createAnswer = function(values, event){
     let question_id = this.url.split("/")[2]
     $.get('/questions/' + question_id + '/options', function (options){          
       $('div.question_options').html(options);
-    attachListeners();
+    attachAnswersListeners();
     });
   });
   event.preventDefault();
@@ -31,7 +31,7 @@ var updateAnswer = function(values, event){
     $.get('/questions/' + question_id + '/options')
     .done(function (options){  
       $('div.question_options').html(options);
-      attachListeners();
+      attachAnswersListeners();
     });
   });
   event.preventDefault();
@@ -80,7 +80,7 @@ var deleteAnswer = function(event){
     $.get('/questions/' + question_id + '/options')
     .done(function (options){  
       $('div.question_options').html(options);
-      attachListeners();
+      attachAnswersListeners();
     });
   })  
   event.preventDefault()

@@ -4,7 +4,7 @@ $(function(){
     event.preventDefault();
     var path = event.target.getAttribute('action');
     $.post(path, function(data) {
-      $('form#question-' + data.question_id + ' :submit').val("Favorite | " + data.question.favorite_count);
+      $('form.favorite#question-' + data.question_id + ' :submit').val("Favorite | " + data.question.favorite_count);
     });
   });
 });
