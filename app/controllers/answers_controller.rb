@@ -38,20 +38,30 @@ class AnswersController < ApplicationController
   end
 
   def edit
-    binding.pry
+    # binding.pry
     render partial: 'answers/form', locals: {answer: @answer, question: @question}
   end
 
   def update
-    return redirect_to question_path(@answer.question), notice: "Answer successfully updated" if @answer.update(answer_params)
-    flash[:error] = @answer.errors.full_messages
-    redirect_to :back
+    # binding.pry
+    if @answer.update(answer_params)
+      @answers = @answer.question.answers
+      render partial: "questions/question_answers", locals: {answers: @answers}
+    else
+
+    # return redirect_to question_path(@answer.question), notice: "Answer successfully updated" if @answer.update(answer_params)
+      flash[:error] = @answer.errors.full_messages
+      redirect_to :back
+    end
   end
 
   def destroy
+    binding.pry
     return redirect_to questions_path, notice: 'Cannot delete another users answer.' unless my_answer?(@answer)
     @answer.destroy
-    redirect_to :back, notice: 'Answer was successfully destroyed.'
+    @answers = @answer.question.answers
+    render partial: "questions/question_answers", locals: {answers: @answers}
+    # redirect_to :back, notice: 'Answer was successfully destroyed.'
   end
 
   private

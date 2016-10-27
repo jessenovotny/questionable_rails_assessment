@@ -2,7 +2,8 @@
 
   <div>
     <%= link_to 'Edit', edit_user_question_path(current_user, question) %> | 
-    <%= link_to 'Destroy', user_question_path(current_user, question), method: :delete, data: { confirm: 'Are you sure?' } %>  
+    <%= link_to 'Destroy', user_question_path(current_user, question), method: :delete, data: { confirm: 'Are you sure?' } %> 
+
   </div>
 <% else %>
   <%= render partial: "favorites/favorite_button", locals: {question: question} %>
@@ -23,9 +24,10 @@
 
         <%= button_to("Answer this question!", new_question_answer_path(question), method: :get, form: {class: "inline_button new_answer_button", id: "question-#{question.id}"}) %>
 
-        <div class="answer_form"></div>
-
       <% end %>
+
+        <div class="answer_form"></div>
+        
     <% else %>
       <%= button_to "Login to answer this question!", login_path, method: :get, form_class: "inline_button" %>
     <% end %>
