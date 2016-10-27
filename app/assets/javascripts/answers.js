@@ -1,37 +1,48 @@
-$(function() {
-// click truncated answer to expand
-  $(".js-more-answer").on('click', function(){
+$(function(){
+  $(".js-more-answer").click(function(event){
+    debugger;
+    event.preventDefault();
     var answer = $(this).data("id")
     $.get("/answers/" + answer +".json" , function(data){
       $('a[data-id='+ data.id + ']').text(data.content)
     })
-    return false;
-  })
+  }
+})
 
-// click "Andswer Question" to display form
-  $("a.new_answer").on('click', function() {
-    debugger;
-    $("div.new_answer")
-    return false;
-  })
+// $(function(){
+//   $(".js-more-answer").click(function(event){
+//     event.preventDefault();
+//     var answer = $(this).data("id")
+//     $.get("/answers/" + answer +".json" , function(data){
+//       $('a[data-id='+ data.id + ']').text(data.content)
+//     })
+//   }
 
-  $("form.new_answer_button").on('submit', function(event){
-    event.preventDefault();
-    var newAnswerFormPath = event.target.getAttribute('action')
-    $.get(newAnswerFormPath, function(formPartial){
-      $("div.new_answer").html(formPartial);
-    });
-  });
-
-  $("form.new_answer").on('submit', function(event){
-    debugger;
-    event.preventDefault();
-    var createAnswerPath = event.target.getAttribute('action')
-    $.post(createAnswerPath, function(answersPartial){
-      debugger;
-    })
-  })
-});
+//   $("form.new_answer_button").submit(function(event){
+//     event.preventDefault();
+//     var newAnswerFormPath = event.target.getAttribute('action')
+//     $("form.new_answer_button").remove()
+//     $.get(newAnswerFormPath, function(formPartial){
+//       $("div.answer_form").html(formPartial);
+//       $("form.new_answer").submit(function(event){
+//         event.preventDefault();
+//         var values = $(this).serialize();
+//         var createAnswerPath = event.target.getAttribute('action')
+//         $.post(createAnswerPath, values)
+//         .done(function(answersPartial){
+//           $('form.new_answer').remove();
+//           $('ul.question_answers').html(answersPartial);
+//           var question_id = this.url.split("/")[2]
+//           $.get('/questions/' + question_id + '/options', function (options){          
+//             $('div.question_options').html(options);
+//             // deleteAnswer();
+//             // editAnswer();
+//           });
+//         });
+//       });
+//     });
+//   });
+// });
 
 
 // eliminate New Answer page - remove links to it located in _question_options and _question

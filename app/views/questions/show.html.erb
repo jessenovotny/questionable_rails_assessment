@@ -3,8 +3,9 @@
 <%= render partial: 'question_categories', locals: {question: @question} %>
 
 <h2><%= @question.content %></h2>
-
-<%= render partial: 'question_options', locals: {question: @question} %>
+<div class="question_options">
+  <%= render partial: 'question_options', locals: {question: @question} %>
+</div>
 
 <ul class="question_answers">
 <%= render partial: "question_answers", locals: {answers: @answers} %>

@@ -14,11 +14,17 @@
   <div>
     <% if logged_in? %>
       <% if answer = user_has_already_answered(question) %>
-        <%= button_to "Edit my Answer", edit_question_answer_path(question, answer), method: :get, form_class: "inline_button" %>
-        <%= button_to "Delete Answer", question_answer_path(question, answer), method: :delete, form_class: "inline_button" %>
+        
+        <%= button_to "Edit my Answer", edit_question_answer_path(question, answer), method: :get,  form: {class: "inline_button edit_answer_button", id: "question-#{question.id}"} %>
+
+        <%= button_to "Delete Answer", question_answer_path(question, answer), method: :delete, form: {class: "inline_button delete_answer_button", id: "question-#{question.id}"} %>
+      
       <% else %>
+
         <%= button_to("Answer this question!", new_question_answer_path(question), method: :get, form: {class: "inline_button new_answer_button", id: "question-#{question.id}"}) %>
-        <div class="new_answer"></div>
+
+        <div class="answer_form"></div>
+
       <% end %>
     <% else %>
       <%= button_to "Login to answer this question!", login_path, method: :get, form_class: "inline_button" %>

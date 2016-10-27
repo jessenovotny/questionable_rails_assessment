@@ -27,18 +27,19 @@ class AnswersController < ApplicationController
 
   def create
     answer = current_user.answers.build(answer_params)
-    # binding.pry
     if answer.save
       @answers = answer.question.answers
       render partial: "questions/question_answers", locals: {answers: @answers}
     else
     # return redirect_to question_path(answer.question), notice: "Answer successfully submitted" if answer.save
       flash[:error] = answer.errors.full_messages
-      render :back
+      redirect_to :back
     end
   end
 
   def edit
+    binding.pry
+    render partial: 'answers/form', locals: {answer: @answer, question: @question}
   end
 
   def update

@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  before_action :set_question, only: [:show, :edit, :update, :destroy]
+  before_action :set_question, only: [:show, :edit, :update, :destroy, :options]
 
   def index
     path = request.env["REQUEST_PATH"]
@@ -48,6 +48,11 @@ class QuestionsController < ApplicationController
     return redirect_to questions_path, notice: 'Cannot delete another users question.' unless my_question?(@question)
     @question.destroy
     redirect_to questions_url, notice: 'Question was successfully destroyed.'
+  end
+
+  def options
+    # binding.pry
+    render partial: 'question_options', locals: {question: @question}
   end
 
   private
