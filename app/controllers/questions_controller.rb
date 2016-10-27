@@ -29,17 +29,20 @@ class QuestionsController < ApplicationController
   end
 
   def update
+    # binding.pry
     if category = Category.find_by(id: params[:category_id])
-      # binding.pry
       # in questions#show, click current category link to remove from categories #
       @question.categories.delete(category) 
       render partial: 'question_categories', locals: {question: @question}
-      # redirect_to :back
+    elsif !!params[:add_categories]
+      @question.update(question_params)
+      render partial: 'question_categories', locals: {question: @question}
+    elsif @question.update(question_params)
+      # binding.pry
+      redirect_to @question, notice: 'Question was successfully updated.'
     elsif params[:question][:content] && !my_question?(@question)
       flash[:error] = ["Cannot edit another user's question."]
       redirect_to @question
-    elsif @question.update(question_params)
-      redirect_to @question, notice: 'Question was successfully updated.'
     else
       flash[:error] = @question.errors.full_messages
       render :edit
