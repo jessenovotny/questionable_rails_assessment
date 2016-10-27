@@ -10,17 +10,18 @@ var removeCategory = function(event){
 
 var addCategory = function(event, values){
   var path = event.target.getAttribute('action') + "?add_categories=true";
-  event.preventDefault();
   $.post(path, values)
   .done(function(categoriesPartial){
     $('div.question_categories').html(categoriesPartial);
     attachCategoryListeners();
   });
+  event.preventDefault();
 };
 
 var attachCategoryListeners = function() {
   $('a.remove_category').click(function(event){
     removeCategory(event);
+    return false;
   });
   $('form.add_category').submit(function(event){
     var values = $(this).serialize();

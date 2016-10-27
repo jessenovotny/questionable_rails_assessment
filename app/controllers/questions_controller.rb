@@ -36,11 +36,9 @@ class QuestionsController < ApplicationController
         @question.categories.delete(category) 
         render partial: 'question_categories', locals: {question: @question}
       elsif !!params[:add_categories]
-        binding.pry
         @question.update(question_params)
         render partial: 'question_categories', locals: {question: @question}
       elsif @question.update(question_params)
-        # binding.pry
         redirect_to @question, notice: 'Question was successfully updated.'
       elsif params[:question][:content] && !my_question?(@question)
         flash[:error] = ["Cannot edit another user's question."]

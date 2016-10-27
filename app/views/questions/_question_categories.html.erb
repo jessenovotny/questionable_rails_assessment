@@ -1,7 +1,7 @@
 <p><strong>Categories:</strong>
 
 <% question.categories.each do |category| %>
-  <%= link_to category.name, question_category_path(category, question), method: :put, class: "remove_category", remote: true %> | 
+  <%= link_to category.name, question_category_path(category, question), method: :put, class: "remove_category" %> | 
 <% end %>
 
 <%= form_for(question, url: user_question_path(question.asker), html: {class: "add_category", id: "#{question.id}"}) do |f| %>
@@ -10,6 +10,7 @@
   
   <%= f.fields_for :categories, @question.categories.build do |categories_fields|  %>
     <%= categories_fields.text_field :name, placeholder: "Create New Category" %>
+  
   <% end %>
   
   <%= submit_tag "Add Categories" %>

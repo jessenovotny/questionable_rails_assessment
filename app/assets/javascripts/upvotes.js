@@ -1,10 +1,9 @@
-// click "Upvote" to create upvote and show updated upvote count
 $(function(){
-  $('form.upvote').on('submit', function(event) {
+  $('form.upvote').submit(function(event) {
     var path = event.target.getAttribute('action');
-    $.post(path, function(data) {
-      $('form#answer-' + data.answer_id + ' :submit').val("Upvote | " + data.answer.upvote_count);
+    $.post(path, function(upvote) {
+      $('form#answer-' + upvote.answer_id + ' :submit').val("Upvote | " + upvote.answer.upvote_count);
     });
-    return false;
+    event.preventDefault();
   });
 });
