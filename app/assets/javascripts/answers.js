@@ -20,7 +20,7 @@ var createAnswer = function(values, event){
         event.preventDefault();
         showAnswerForm(event);
       });
-      // deleteAnswer();
+      attachListeners();
     });
   });
 };
@@ -61,21 +61,21 @@ var showAnswerForm = function(event) {
 };
 
 var deleteAnswer = function(event){
-  event.preventDefault()
   var answerDeletePath = event.target.getAttribute('action')
-  $.ajax({
-    url: answerDeletePath,
-    type: 'DELETE'
-    success: function(answersPartial){
-  debugger;
-      $('ul.question_answers').append(answersPartial);
+  var data = {"_method":"delete"}
+  $.post(answerDeletePath, data)
+  .done(function(answersPartial){
+      // debugger;
+      $('ul.question_answers').html(answersPartial);
       let question_id = this.url.split("/")[2]
       $.get('/questions/' + question_id + '/options')
       .done(function (options){  
+        // debugger;
         $('div.question_options').html(options);
-      }
-    }
+        // alert("deleted")
+      });
   })  
+  event.preventDefault()
 }
 
 var attachListeners = function(){

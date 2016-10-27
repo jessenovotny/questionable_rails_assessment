@@ -56,7 +56,7 @@ class AnswersController < ApplicationController
   end
 
   def destroy
-    binding.pry
+    # binding.pry
     return redirect_to questions_path, notice: 'Cannot delete another users answer.' unless my_answer?(@answer)
     @answer.destroy
     @answers = @answer.question.answers
