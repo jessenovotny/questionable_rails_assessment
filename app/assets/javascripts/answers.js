@@ -6,16 +6,36 @@ var showMoreAnswer = function(event){
   });
 };
 
-var newAnswerForm = function(event){
-  
-}
+var newAnswerForm = function(event) {
+  event.preventDefault()
+  var newAnswerFormPath = event.target.getAttribute('action')
+  $("form.new_answer_button").remove()
+  $.get(newAnswerFormPath, function(formPartial){
+    $("div.answer_form").html(formPartial);
+    $("form.new_answer").submit(function(event){
+      event.preventDefault();
+      var values = $(this).serialize();
+      var createAnswerPath = event.target.getAttribute('action')
+      $.post(createAnswerPath, values)
+      .done(function(answersPartial){
+        $('form.new_answer').remove();
+        $('ul.question_answers').html(answersPartial);
+        var question_id = this.url.split("/")[2]
+        $.get('/questions/' + question_id + '/options', function (options){          
+          $('div.question_options').html(options);
+          // deleteAnswer();
+          // editAnswer();
+        });
+      });
+    });
+  });
+};
 
 var attachListeners = function(){
   $(".js-more-answer").click(function(event){
     showMoreAnswer(event);
   });
-  $("form.new_answer_button").submit(function(event){
-    debugger;
+  $("form.new_answer_button").on('submit', function(event){
     newAnswerForm(event);
   });
 };
