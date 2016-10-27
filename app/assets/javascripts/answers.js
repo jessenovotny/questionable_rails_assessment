@@ -1,22 +1,41 @@
-$(function(){
+var showMoreAnswer = function(event){
+  event.preventDefault();
+  var answer_id = event.target.getAttribute("id")
+  $.get("/answers/" + answer_id + ".json", function(answer){
+    $('a#' + answer.id).text(answer.content)
+  });
+};
+
+var newAnswerForm = function(event){
+  
+}
+
+var attachListeners = function(){
   $(".js-more-answer").click(function(event){
+    showMoreAnswer(event);
+  });
+  $("form.new_answer_button").submit(function(event){
     debugger;
-    event.preventDefault();
-    var answer = $(this).data("id")
-    $.get("/answers/" + answer +".json" , function(data){
-      $('a[data-id='+ data.id + ']').text(data.content)
-    })
-  }
-})
+    newAnswerForm(event);
+  });
+};
+
+
+$(function(){
+  attachListeners();
+});
 
 // $(function(){
 //   $(".js-more-answer").click(function(event){
+//     debugger;
 //     event.preventDefault();
 //     var answer = $(this).data("id")
-//     $.get("/answers/" + answer +".json" , function(data){
-//       $('a[data-id='+ data.id + ']').text(data.content)
-//     })
+    // $.get("/answers/" + answer +".json" , function(data){
+    //   $('a[data-id='+ data.id + ']').text(data.content)
+    // })
 //   }
+// })
+
 
 //   $("form.new_answer_button").submit(function(event){
 //     event.preventDefault();
