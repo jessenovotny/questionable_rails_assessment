@@ -1,10 +1,10 @@
 <p><strong>Categories:</strong>
 
 <% question.categories.each do |category| %>
-  <%= link_to category.name, question_category_path(category, question), method: :put %> | 
+  <%= link_to category.name, question_category_path(category, question), method: :put, class: "remove_category", remote: true %> | 
 <% end %>
 
-<%= form_for(question, url: user_question_path(question.asker)) do |f| %>
+<%= form_for(question, url: user_question_path(question.asker), form: {class: "add_cateogory", id: "#{question.id}"}) do |f| %>
   
   <%= select_tag "question[category_dropdown]", options_from_collection_for_select(Category.all_for(question), "id", "name"), include_blank: "Add a Category" %>
   

@@ -86,7 +86,7 @@ var deleteAnswer = function(event){
   event.preventDefault()
 }
 
-var attachListeners = function(){
+var attachAnswersListeners = function(){
   $(".js-more-answer").click(function(event){
     showMoreAnswer(event);
   });
@@ -106,7 +106,7 @@ var attachListeners = function(){
 
 
 $(function(){
-  attachListeners();
+  attachAnswersListeners();
 });
 
 // eliminate New Answer page - remove links to it located in _question_options and _question *** Already done with question_options

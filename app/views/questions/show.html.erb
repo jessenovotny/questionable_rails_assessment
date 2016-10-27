@@ -1,6 +1,7 @@
 <p><strong>Question by:</strong> <%= @question.asker.username %></p>
-
-<%= render partial: 'question_categories', locals: {question: @question} %>
+<div class="question_categories">
+  <%= render partial: 'question_categories', locals: {question: @question} %>
+</div>
 
 <h2><%= @question.content %></h2>
 <div class="question_options">
