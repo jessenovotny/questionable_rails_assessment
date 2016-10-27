@@ -1,13 +1,12 @@
 var showMoreAnswer = function(event){
-  event.preventDefault();
   var answer_id = event.target.getAttribute("id")
   $.get("/answers/" + answer_id + ".json", function(answer){
     $('a#' + answer.id).text(answer.content)
   });
+  event.preventDefault();
 };
 
 var createAnswer = function(values, event){
-  event.preventDefault();
   var path = event.target.getAttribute('action')
   $.post(path, values)
   .done(function(answersPartial){
@@ -16,30 +15,32 @@ var createAnswer = function(values, event){
     let question_id = this.url.split("/")[2]
     $.get('/questions/' + question_id + '/options', function (options){          
       $('div.question_options').html(options);
-      $("form.edit_answer_button").submit(function(event){
-        event.preventDefault();
-        showAnswerForm(event);
-      });
-      attachListeners();
+      // $("form.edit_answer_button").submit(function(event){
+      //   event.preventDefault();
+      //   showAnswerForm(event);
+      // });
+    attachListeners();
     });
   });
+  event.preventDefault();
 };
 
 var updateAnswer = function(values, event){
-  event.preventDefault();
   var path = event.target.getAttribute('action')
   $.post(path, values)
   .done(function(answersPartial){
     $('form.edit_answer').remove();
-    $('ul.question_answers').append(answersPartial);
+    $('ul.question_answers').html(answersPartial);
     let question_id = this.url.split("/")[2]
     $.get('/questions/' + question_id + '/options')
     .done(function (options){  
       $('div.question_options').html(options);
+      attachListeners();
       // must reload the page before you can click "edit" again...
       // even if attachListeners is called again.
     });
   });
+  event.preventDefault();
 }
 
 
@@ -65,15 +66,13 @@ var deleteAnswer = function(event){
   var data = {"_method":"delete"}
   $.post(answerDeletePath, data)
   .done(function(answersPartial){
-      // debugger;
-      $('ul.question_answers').html(answersPartial);
-      let question_id = this.url.split("/")[2]
-      $.get('/questions/' + question_id + '/options')
-      .done(function (options){  
-        // debugger;
-        $('div.question_options').html(options);
-        // alert("deleted")
-      });
+    $('ul.question_answers').html(answersPartial);
+    let question_id = this.url.split("/")[2]
+    $.get('/questions/' + question_id + '/options')
+    .done(function (options){  
+      $('div.question_options').html(options);
+      attachListeners();
+    });
   })  
   event.preventDefault()
 }
