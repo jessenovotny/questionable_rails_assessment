@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.2.3'
 
-# gem 'jquery-turbolinks'
+gem 'dotenv-rails', :groups => [:development, :test]
 gem 'faker'
 gem 'bcrypt'
 gem 'omniauth-twitter'

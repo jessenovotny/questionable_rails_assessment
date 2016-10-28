@@ -1,5 +1,5 @@
 class AnswersController < ApplicationController
-  before_action :set_answer, only: [:edit, :update, :destroy]
+  before_action :set_answer, only: [:edit, :update, :destroy, :show]
   before_action :set_question, only: [:new, :edit]
 
   def index
@@ -9,7 +9,6 @@ class AnswersController < ApplicationController
   end
 
   def show
-    set_answer
     respond_to do |format|
       format.html {redirect_to :back}
       format.json {render json: @answer}
@@ -77,10 +76,10 @@ class AnswersController < ApplicationController
   end
 
   def render_question_answers answers
-    render partial: "answers/question_answers", locals: {answers: answers}
+    render partial: "answers/question_answer", collection: @answers
   end
 
-  def render_answer_form(answer, question)
+  def render_answer_form answer, question
     render partial: 'answers/form', locals: {answer: answer, question: question}
   end
 end

@@ -1,0 +1,7 @@
+<p class="answer js-more-answer" id="<%= answer.id %>">
+  <%= truncate answer.content, length: 100, separator: ' ', omission: '... (click to see more)' %>
+</p>
+
+<%= render partial: "upvotes/upvote_button", locals: {answer: answer} %>
+
+<br>

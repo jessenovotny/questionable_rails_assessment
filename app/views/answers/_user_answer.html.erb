@@ -1,0 +1,9 @@
+  <% question = user_answer.question %>
+  
+  <h3 id="question">
+    <%= link_to "#{question.content}", question %>
+  </h3>
+    
+  <%= render partial: "favorites/favorite_button", locals: {question: question} %>
+  
+  <%= render user_answer %>

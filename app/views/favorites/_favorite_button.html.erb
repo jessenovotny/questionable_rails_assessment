@@ -1,0 +1,1 @@
+<%= button_to("Favorite | #{question.favorite_count}", question_favorites_path(question), form: {class: "inline_button favorite", id: "question-#{question.id}"}) if logged_in? %>

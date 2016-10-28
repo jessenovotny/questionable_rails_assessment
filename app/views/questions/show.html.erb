@@ -19,6 +19,7 @@
 <br>
 <!-- index answers with answer.user -->
 <div class="question_answers">
-  <%= render partial: "answers/question_answers", locals: {answers: @answers} %>
+  <%#= render partial: "answers/question_answers", locals: {answers: @answers} %>
+  <%= render partial: "answers/question_answer", collection: @answers %>
 </div>
 

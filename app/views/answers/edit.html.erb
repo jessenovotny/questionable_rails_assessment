@@ -1,8 +1,0 @@
-<p><strong>Question by:</strong> <%= @question.asker.username %>
-</p>
-
-<h2><%= @question.content %></h2>
-
-Edit your answer:
-
-<%= render partial: 'answers/form', locals: {answer: @answer, question: @question} %>

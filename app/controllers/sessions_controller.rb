@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
   end
 
   def create
+    # binding.pry
     if auth #coming from FB
       user = User.find_or_create_by(:uid => auth[:uid])
       user.username = auth[:info][:name]
@@ -19,13 +20,13 @@ class SessionsController < ApplicationController
       end
     else #coming from login page
       user = User.find_by(username: params[:user][:username])
+      referral_path = params[:user][:referral_path]
       unless user && user.authenticate(params[:user][:password])
         flash[:error] = ["Unknown username and/or password"]
         return redirect_to :back
       end
     end
     login(user)
-    referral_path = params[:user][:referral_path]
     redirect_to referral_path || root_path, notice: "Successfully logged in as #{user.username}"
   end
  

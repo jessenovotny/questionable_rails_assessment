@@ -56,11 +56,10 @@ class QuestionsController < ApplicationController
   def destroy
     return redirect_to questions_path, notice: 'Cannot delete another users question.' unless my_question?(@question)
     @question.destroy
-    redirect_to questions_url, notice: 'Question was successfully destroyed.'
+    redirect_to root_path, notice: 'Question was successfully destroyed.'
   end
 
   def options
-    # binding.pry
     render partial: 'question_options', locals: {question: @question}
   end
 
