@@ -10,7 +10,8 @@ class FavoritesController < ApplicationController
       question = Question.find(params[:question_id])
       favorite = question.favorites.build(user_id: current_user.id)
       favorite.save ? favorite.new_favorite = true : Favorite.find_by(question_id: question.id, user_id: current_user.id).delete
-      render json: {favorite: favorite, question: question}
+      question = Question.find(params[:question_id])
+      render json: [favorite, question]
     end
   end
 end
