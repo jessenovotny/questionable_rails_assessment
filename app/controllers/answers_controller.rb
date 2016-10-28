@@ -31,7 +31,7 @@ class AnswersController < ApplicationController
         @question = answer.question
         redirect_to question_path(@question), notice: "Answer successfully submitted"
       else
-        @answers = answer.question.answers
+        @answers = answer.question.answers_sorted_by_upvotes
         render_question_answers(@answers)
       end
     else
@@ -46,7 +46,7 @@ class AnswersController < ApplicationController
 
   def update
     if @answer.update(answer_params)
-      @answers = @answer.question.answers
+      @answers = @answer.question.answers_sorted_by_upvotes
       render_question_answers(@answers)
     else
       flash[:error] = @answer.errors.full_messages
@@ -57,7 +57,7 @@ class AnswersController < ApplicationController
   def destroy
     return redirect_to questions_path, notice: 'Cannot delete another users answer.' unless my_answer?(@answer)
     @answer.destroy
-    @answers = @answer.question.answers
+    @answers = @answer.question.answers_sorted_by_upvotes
     render_question_answers(@answers)
   end
 

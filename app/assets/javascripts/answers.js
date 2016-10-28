@@ -31,7 +31,7 @@ var createAnswer = function(values, event){
   var path = event.target.getAttribute('action')
   $.post(path, values)
   .done(function(answersPartial){
-    $('form.new_answer').remove();
+    // $('form.new_answer').remove();
     updatePartials(answersPartial, this);
     // $('div.question_answers').html(answersPartial);
     // let question_id = this.url.split("/")[2]
@@ -47,7 +47,7 @@ var updateAnswer = function(values, event){
   var path = event.target.getAttribute('action')
   $.post(path, values)
   .done(function(answersPartial){
-    $('form.edit_answer').remove();
+    // $('form.edit_answer').remove();
     updatePartials(answersPartial, this);
     // $('div.question_answers').html(answersPartial);
     // let question_id = this.url.split("/")[2]
@@ -97,13 +97,7 @@ var deleteAnswer = function(event){
   var data = {"_method":"delete"}
   $.post(answerDeletePath, data)
   .done(function(answersPartial){
-    $('div.question_answers').html(answersPartial);
-    let question_id = this.url.split("/")[2]
-    $.get('/questions/' + question_id + '/options')
-    .done(function (options){  
-      $('div.question_options').html(options);
-      attachAnswersListeners();
-    });
+    updatePartials(answersPartial, this);
   })  
   event.preventDefault()
 }
