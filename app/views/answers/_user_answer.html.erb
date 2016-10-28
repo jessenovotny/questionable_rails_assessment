@@ -1,9 +1,23 @@
-  <% question = user_answer.question %>
-  
-  <h3 id="question">
-    <%= link_to "#{question.content}", question %>
-  </h3>
+<% question = user_answer.question %>
+
+<div>
+
+  <div class="question">
+
+    <h3 id="question">
+
+      <%= link_to "#{question.content}", question %>
+      
+    </h3>
+
+    <%= render partial: "favorites/favorite_button", locals: {question: question} %>
+
+  </div>
+
+  <div class="answer">
     
-  <%= render partial: "favorites/favorite_button", locals: {question: question} %>
-  
-  <%= render user_answer %>
+    <%= render user_answer %>
+
+  </div>
+
+</div>

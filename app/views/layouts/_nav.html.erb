@@ -5,7 +5,7 @@
   Welcome, <%= link_to(current_user.username, user_answers_path(current_user)) %>! | 
   <%= link_to("Favorited Q's", user_favorites_path(current_user)) %> | 
   <%= link_to("Ask A Question", new_user_question_path(current_user)) %> | 
-  <%= link_to("Logout", logout_path, method: 'DELETE') %>
+  <%= link_to("Logout", logout_path) %>
 
 <% else %>
 

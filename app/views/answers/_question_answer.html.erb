@@ -1,7 +1,13 @@
 <% answer = question_answer %>
 
-<strong>
-  <%= link_to "#{answer.user.username}", user_answers_path(answer.user) %>:
-</strong>
+<div class="answer">
+  
+  <strong>
 
-<%= render answer %>
+    <%= link_to "#{answer.user.username}", user_answers_path(answer.user) %>:
+  
+  </strong>
+
+  <%= render answer %>
+
+</div>

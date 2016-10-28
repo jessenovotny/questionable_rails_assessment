@@ -1,33 +1,36 @@
 <div>
 
-  <h3 id="question">
-    <%= link_to "#{question.content}", question %>
-  </h3>
-
-  <%= render partial: "favorites/favorite_button", locals: {question: question} %>
-
-</div>
-
-<% if answered?(question) %>
-  
-  <div class="answer">
-
-    <strong><%= link_to "#{question.top_answer.user.username}", user_answers_path(question.top_answer.user) %></strong> writes:
+  <div class="question">
     
-    <%= render partial: "answers/answer_truncate", locals: {answer: question.top_answer} %>
+    <h3 id="question">
+      <%= link_to "#{question.content}", question %>
+    </h3>
 
-  </div>
-  
-<% elsif logged_in? %>
-
-  <div class="answer_form">
-
-    <%= button_to("Answer this question!", new_question_answer_path(question), method: :get, form: {class: "inline_button first_answer_button", id: "question-#{question.id}"}) unless my_question?(question) %>
+    <%= render partial: "favorites/favorite_button", locals: {question: question} %>
 
   </div>
 
-<% else %>
+  <% if answered?(question) %>
+    
+    <div class="answer">
 
-  <%= link_to("Login to Answer this question", login_path) %>
+      <strong><%= link_to "#{question.top_answer.user.username}", user_answers_path(question.top_answer.user) %></strong> writes:
+      
+      <%= render partial: "answers/answer_truncate", locals: {answer: question.top_answer} %>
 
-<% end %>
+    </div>
+    
+  <% elsif logged_in? %>
+
+    <div class="answer_form">
+
+      <%= button_to("Answer this question!", new_question_answer_path(question), method: :get, form: {class: "inline_button first_answer_button", id: "question-#{question.id}"}) unless my_question?(question) %>
+
+    </div>
+
+  <% else %>
+
+    <%= link_to("Login to Answer this question", login_path) %>
+
+  <% end %>
+</div>

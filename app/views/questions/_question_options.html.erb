@@ -1,18 +1,17 @@
 <% if my_question?(question) %>
-  
-  <div>
-    <%= render partial: "favorites/favorite_button", locals: {question: question} %>
 
-    <%= button_to("Edit", edit_user_question_path(current_user, question), method: :get, form: {class: "inline_button"}) %>
+    <%= button_to("Edit Question", edit_user_question_path(current_user, question), method: :get, form: {class: "inline_button"}) %>
 
     <%= button_to("Delete", user_question_path(current_user, question), method: :delete, data: { confirm: 'Are you sure?' }, form: {class: "inline_button"}) %>
     
-  </div>  
+ 
 
 <% end %>
 
 <h3>
+  
   <%= question.answer_count %> Answer(s):
+  
 </h3>
 
 <% if logged_in? && !my_question?(question) %>

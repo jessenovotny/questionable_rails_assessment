@@ -109,13 +109,20 @@ label {
   display: inline;
  }
 
- #question {
+ .inline_div {
+  display: inline;
+ }
+
+ h3#question {
   margin-bottom: 5px;
  }
 
- .answer {
+ div.answer {
   padding: 0px;
-  margin-bottom: 5px;
-  margin-top: 5px;
-  margin-left: 0px;
+  margin: 10px 5px 25px 10px; 
+ }
+
+ p.answer {
+  padding: 0px;
+  margin: 5px 5px 5px 0px; 
  }

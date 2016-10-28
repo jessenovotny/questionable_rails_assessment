@@ -29,7 +29,6 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    # binding.pry
     if logged_in?
       if category = Category.find_by(id: params[:category_id])
         # in questions#show, click current category link to remove from categories #
@@ -48,8 +47,7 @@ class QuestionsController < ApplicationController
         render :edit
       end
     else
-      flash[:error] =  "Must be logged in to make changes"
-      redirect_to :back
+      redirect_to @question
     end
   end
 

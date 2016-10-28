@@ -1,25 +1,36 @@
 <p>
-  <strong>Question by:</strong> 
-  <%= @question.asker.username %>
+
+  <strong>Question by:</strong> <%= @question.asker.username %>
+
 </p>
 
 <div class="question_categories">
+
   <%= render partial: 'question_categories', locals: {question: @question} %>
+
 </div>
 
 <h2>
+
   <%= @question.content %>
+
 </h2>
 
-<!-- answer, edit, destroy answer -->
-<div class="question_options">
+<%= render partial: "favorites/favorite_button", locals: {question: @question} %>
+
+<div class="question_options inline_div">
+
+  <!-- answer, edit, destroy answer -->
   <%= render partial: 'question_options', locals: {question: @question} %>
+
 </div>
 
 <br>
-<!-- index answers with answer.user -->
+
 <div class="question_answers">
-  <%#= render partial: "answers/question_answers", locals: {answers: @answers} %>
+
+  <!-- index answers with answer.user -->
   <%= render partial: "answers/question_answer", collection: @answers %>
+
 </div>
 

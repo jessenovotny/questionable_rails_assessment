@@ -1,12 +1,17 @@
 <%= form_for([question, answer]) do |f| %>
 
   <div class="field-with-errors">
+
     <%= text_area_tag 'answer[content]', "#{answer.content}", rows: 4, cols: 40, placeholder: "Enter your answer here" %>
+
     <%= hidden_field_tag 'answer[question_id]', question.id %>
+
   </div>
 
   <div class="actions">
+
     <%= f.submit %>
+    
   </div>
 
 <% end %>
