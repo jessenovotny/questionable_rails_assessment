@@ -6,22 +6,39 @@ var showMoreAnswer = function(event){
   event.preventDefault();
 };
 
-var updateAnswersPartial = function(answersPartial, page){
+var updatePartials = function(answersPartial, thisPage){
   $('div.question_answers').html(answersPartial);
-  let question_id = page.url.split("/")[2]
+  let question_id = thisPage.url.split("/")[2]
   $.get('/questions/' + question_id + '/options')
-  .done(function (options){          
+  .done(function (options){  
     $('div.question_options').html(options);
-  attachAnswersListeners();
+    attachAnswersListeners();
   });
-}
+};
+
+  // $('div.question_answers').html(answersPartial);
+  // let question_id = thisPage.url.split("/")[2]
+  // $.get('/questions/' + question_id + '/options')
+  // .done(function (options){  
+  //   $('div.question_options').html(options);
+  //   attachAnswersListeners();
+  // });
+
+
+
 
 var createAnswer = function(values, event){
   var path = event.target.getAttribute('action')
   $.post(path, values)
   .done(function(answersPartial){
     $('form.new_answer').remove();
-    updateAnswersPartial(answersPartial, this);
+    updatePartials(answersPartial, this);
+    // $('div.question_answers').html(answersPartial);
+    // let question_id = this.url.split("/")[2]
+    // $.get('/questions/' + question_id + '/options', function (options){          
+    //   $('div.question_options').html(options);
+    // attachAnswersListeners();
+    // });
   });
   event.preventDefault();
 };
@@ -31,7 +48,14 @@ var updateAnswer = function(values, event){
   $.post(path, values)
   .done(function(answersPartial){
     $('form.edit_answer').remove();
-    updateAnswersPartial(answersPartial, this);
+    updatePartials(answersPartial, this);
+    // $('div.question_answers').html(answersPartial);
+    // let question_id = this.url.split("/")[2]
+    // $.get('/questions/' + question_id + '/options')
+    // .done(function (options){  
+    //   $('div.question_options').html(options);
+    //   attachAnswersListeners();
+    // });
   });
   event.preventDefault();
 };
@@ -106,6 +130,3 @@ var attachAnswersListeners = function(){
 $(function(){
   attachAnswersListeners();
 });
-
-// eliminate New Answer page - remove links to it located in _question_options and _question *** Already done with question_options
-// remove answers/new.html.erb 

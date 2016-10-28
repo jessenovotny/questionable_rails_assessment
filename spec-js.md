@@ -5,7 +5,7 @@ Specs:
 - [x] Include a show resource rendered using jQuery and an Active Model Serialization JSON backend.
 <!-- click to show more of truncated answer -->
 - [x] Include an index resource rendered using jQuery and an Active Model Serialization JSON backend.
-<!-- more appropriate to render partials using jQuery for index views -->
+<!-- found it more appropriate to render partials using jQuery for index resources -->
 - [x] Include at least one has_many relationship in information rendered via JSON and appended to the DOM.
 <!-- answers has_many upvotes; questions has_many favorites and answers -->
 favorites
