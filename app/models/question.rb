@@ -43,7 +43,7 @@ class Question < ApplicationRecord
   end
 
   def favorited_by? current_user
-    Favorite.find_by(question_id: self.id, user_id: current_user.try(:id)) ? "  <3  " : "Favorite"
+    Favorite.find_by(question_id: self.id, user_id: current_user.try(:id)) ? "   <3   " : "Favorite"
   end
 
   ### FILTERS ###

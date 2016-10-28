@@ -34,7 +34,7 @@ Question.all.each do |question|
   rand(1..10).times do
     user_id = User.find_by(id: rand(1..40)).try(:id)
     answer = question.answers.build(content: Faker::Hacker.say_something_smart, user_id: user_id)
-    rand(4..6).times do
+    rand(4..7).times do
       answer += " "
       answer += Faker::Hacker.say_something_smart
     end
