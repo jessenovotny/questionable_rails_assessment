@@ -18,7 +18,7 @@ $(function(){
     var path = event.target.getAttribute('action');
     $.post(path, function(favoriteJSON) {      
       var favorite = new Favorite(favoriteJSON.new_favorite, favoriteJSON.question_id, favoriteJSON.question);
-      // debugger;
+      debugger;
       if(favorite.new_favorite){
         favorite.thankUser();
         favorite.changeButton();
