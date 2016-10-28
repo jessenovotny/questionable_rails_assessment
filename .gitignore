@@ -1,4 +1,4 @@
 /.env
-/log/development.log
-/log/test.log
+*.log
+*.cache
 /tmp
