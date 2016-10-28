@@ -1,7 +1,7 @@
 var showMoreAnswer = function(event){
   var answer_id = event.target.getAttribute("id")
   $.get("/answers/" + answer_id + ".json", function(answer){
-    $('a#' + answer.id).text(answer.content)
+    $('p#' + answer.id).text(answer.content)
   });
   event.preventDefault();
 };
@@ -11,7 +11,7 @@ var createAnswer = function(values, event){
   $.post(path, values)
   .done(function(answersPartial){
     $('form.new_answer').remove();
-    $('ul.question_answers').html(answersPartial);
+    $('div.question_answers').html(answersPartial);
     let question_id = this.url.split("/")[2]
     $.get('/questions/' + question_id + '/options', function (options){          
       $('div.question_options').html(options);
@@ -26,7 +26,7 @@ var updateAnswer = function(values, event){
   $.post(path, values)
   .done(function(answersPartial){
     $('form.edit_answer').remove();
-    $('ul.question_answers').html(answersPartial);
+    $('div.question_answers').html(answersPartial);
     let question_id = this.url.split("/")[2]
     $.get('/questions/' + question_id + '/options')
     .done(function (options){  
@@ -35,7 +35,7 @@ var updateAnswer = function(values, event){
     });
   });
   event.preventDefault();
-}
+};
 
 
 var showAnswerForm = function(event) {
@@ -60,12 +60,11 @@ var showFirstAnswerForm = function(event) {
   $("form.first_answer_button").remove()
   $.get(newAnswerFormPath, function(formPartial){
     $("div.answer_form").html(formPartial);
-    $("form.new_answer").submit(function(event){
-      event.preventDefault();
-      var values = $(this).serialize();      
-      var path = event.target.getAttribute('action') + '?first=true'
-      $.post(path, values)
-    });
+    $('<input>').attr({
+      type: 'hidden',
+      name: 'first_answer',
+      value: true
+    }).appendTo("form.new_answer")
   });
   event.preventDefault()
 };
@@ -75,7 +74,7 @@ var deleteAnswer = function(event){
   var data = {"_method":"delete"}
   $.post(answerDeletePath, data)
   .done(function(answersPartial){
-    $('ul.question_answers').html(answersPartial);
+    $('div.question_answers').html(answersPartial);
     let question_id = this.url.split("/")[2]
     $.get('/questions/' + question_id + '/options')
     .done(function (options){  
@@ -87,7 +86,7 @@ var deleteAnswer = function(event){
 }
 
 var attachAnswersListeners = function(){
-  $(".js-more-answer").click(function(event){
+  $("p.js-more-answer").click(function(event){
     showMoreAnswer(event);
   });
   $("form.new_answer_button").submit(function(event){

@@ -1,14 +1,24 @@
-<p><strong>Question by:</strong> <%= @question.asker.username %></p>
+<p>
+  <strong>Question by:</strong> 
+  <%= @question.asker.username %>
+</p>
+
 <div class="question_categories">
   <%= render partial: 'question_categories', locals: {question: @question} %>
 </div>
 
-<h2><%= @question.content %></h2>
+<h2>
+  <%= @question.content %>
+</h2>
+
+<!-- answer, edit, destroy answer -->
 <div class="question_options">
   <%= render partial: 'question_options', locals: {question: @question} %>
 </div>
 
-<ul class="question_answers">
-<%= render partial: "question_answers", locals: {answers: @answers} %>
-</ul>
+<br>
+<!-- index answers with answer.user -->
+<div class="question_answers">
+  <%= render partial: "answers/question_answers", locals: {answers: @answers} %>
+</div>
 

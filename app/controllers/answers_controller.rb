@@ -5,6 +5,7 @@ class AnswersController < ApplicationController
   def index
     @user = User.find(params[:user_id])
     @answers = @user.answers_sorted_by_upvotes
+    @questions = @answers.map{|a| a.question}
   end
 
   def show
@@ -21,18 +22,18 @@ class AnswersController < ApplicationController
       return redirect_to :back
     end
     @answer = @question.answers.build
-    render partial: 'answers/form', locals: {answer: @answer, question: @question}
+    render_answer_form(@answer, @question)
   end
 
   def create
     answer = current_user.answers.build(answer_params)
     if answer.save
-      if params[:first]
+      if !!params[:first_answer]
         @question = answer.question
         redirect_to question_path(@question), notice: "Answer successfully submitted"
       else
         @answers = answer.question.answers
-        render partial: "questions/question_answers", locals: {answers: @answers}
+        render_question_answers(@answers)
       end
     else
       flash[:error] = answer.errors.full_messages
@@ -41,13 +42,13 @@ class AnswersController < ApplicationController
   end
 
   def edit
-    render partial: 'answers/form', locals: {answer: @answer, question: @question}
+    render_answer_form(@answer, @question)
   end
 
   def update
     if @answer.update(answer_params)
       @answers = @answer.question.answers
-      render partial: "questions/question_answers", locals: {answers: @answers}
+      render_question_answers(@answers)
     else
       flash[:error] = @answer.errors.full_messages
       redirect_to :back
@@ -58,7 +59,7 @@ class AnswersController < ApplicationController
     return redirect_to questions_path, notice: 'Cannot delete another users answer.' unless my_answer?(@answer)
     @answer.destroy
     @answers = @answer.question.answers
-    render partial: "questions/question_answers", locals: {answers: @answers}
+    render_question_answers(@answers)
   end
 
   private
@@ -73,6 +74,14 @@ class AnswersController < ApplicationController
 
   def set_question
     @question = Question.find(params[:question_id])
+  end
+
+  def render_question_answers answers
+    render partial: "answers/question_answers", locals: {answers: answers}
+  end
+
+  def render_answer_form(answer, question)
+    render partial: 'answers/form', locals: {answer: answer, question: question}
   end
 end
 

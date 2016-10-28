@@ -48,7 +48,7 @@ class Question < ApplicationRecord
 
   ### FILTERS ###
   def self.newest
-    questions = order(:id).take(10)
+    questions = order(id: :desc).take(10)
     # Kaminari.paginate_array(questions).page(page)
   end
 
@@ -59,7 +59,7 @@ class Question < ApplicationRecord
   end
 
   def self.oldest
-    questions = order(id: :desc).take(10)
+    questions = order(:id).take(10)
     # Kaminari.paginate_array(questions).page(page)
   end
 

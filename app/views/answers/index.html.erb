@@ -1,6 +1,8 @@
-<h1>Showing <%= @answers.count %> Answers by <%= @user.username %>:</h1>
+<h1>
+  Showing <%= @answers.count %> Answers by <%= @user.username %>:
+</h1>
 
 <br>
 
-<%= render partial: "users_answers", locals: {answers: @answers} %>
+<%= render partial: "user_answers", locals: {answers: @answers} %>
 
