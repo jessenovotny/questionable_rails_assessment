@@ -1,17 +1,19 @@
 <% if my_question?(question) %>
-
+  
   <div>
-    <%= link_to 'Edit', edit_user_question_path(current_user, question), class: "edit_question" %> | 
-    <%= link_to 'Destroy', user_question_path(current_user, question), method: :delete, data: { confirm: 'Are you sure?' } %> 
+    <%= render partial: "favorites/favorite_button", locals: {question: question} %>
 
-  </div>
-<% else %>
-  <%= render partial: "favorites/favorite_button", locals: {question: question} %>
+    <%= button_to("Edit", edit_user_question_path(current_user, question), method: :get, form: {class: "inline_button"}) %>
+
+    <%= button_to("Delete", user_question_path(current_user, question), method: :delete, data: { confirm: 'Are you sure?' }, form: {class: "inline_button"}) %>
+    
+  </div>  
+
 <% end %>
 
 <h3><%= question.answer_count %> Answer(s):</h3>
 
-<% if !my_question?(question) %>
+<% if !my_question?(question) && logged_in? %>
   <div>
     <% if logged_in? %>
       <% if answer = user_has_already_answered(question) %>
@@ -28,9 +30,8 @@
 
         <div class="answer_form"></div>
         
-    <% else %>
-      <%= button_to "Login to answer this question!", login_path, method: :get, form_class: "inline_button" %>
-    <% end %>
+  <% elsif !my_question?(question) %>
+    <%= button_to "Login to answer this question!", login_path, method: :get, form_class: "inline_button" %>
   </div>
 <% end %>
 
