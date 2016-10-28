@@ -22,6 +22,10 @@ $(function(){
     var path = event.target.getAttribute('action');
     $.post(path, function(response) {      
       
+      if(currentPage() == "favorites"){
+        return location.reload();
+      }
+      
       var favorite = new Favorite(response[0].new_favorite);
       var question = response[1];
 
@@ -30,10 +34,6 @@ $(function(){
       };
       
       $('form.favorite#question-' + question.id + ' :submit').val(favorite.favorited + " | " + question.favorites.length);
-      if(currentPage() == "favorites"){
-        location.reload();
-      }
-      // debugger;
     });
     event.preventDefault();
   });

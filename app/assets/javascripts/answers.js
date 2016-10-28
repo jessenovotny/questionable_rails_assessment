@@ -6,17 +6,22 @@ var showMoreAnswer = function(event){
   event.preventDefault();
 };
 
+var updateAnswersPartial = function(answersPartial, page){
+  $('div.question_answers').html(answersPartial);
+  let question_id = page.url.split("/")[2]
+  $.get('/questions/' + question_id + '/options')
+  .done(function (options){          
+    $('div.question_options').html(options);
+  attachAnswersListeners();
+  });
+}
+
 var createAnswer = function(values, event){
   var path = event.target.getAttribute('action')
   $.post(path, values)
   .done(function(answersPartial){
     $('form.new_answer').remove();
-    $('div.question_answers').html(answersPartial);
-    let question_id = this.url.split("/")[2]
-    $.get('/questions/' + question_id + '/options', function (options){          
-      $('div.question_options').html(options);
-    attachAnswersListeners();
-    });
+    updateAnswersPartial(answersPartial, this);
   });
   event.preventDefault();
 };
@@ -26,13 +31,7 @@ var updateAnswer = function(values, event){
   $.post(path, values)
   .done(function(answersPartial){
     $('form.edit_answer').remove();
-    $('div.question_answers').html(answersPartial);
-    let question_id = this.url.split("/")[2]
-    $.get('/questions/' + question_id + '/options')
-    .done(function (options){  
-      $('div.question_options').html(options);
-      attachAnswersListeners();
-    });
+    updateAnswersPartial(answersPartial, this);
   });
   event.preventDefault();
 };
