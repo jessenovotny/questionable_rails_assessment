@@ -3,17 +3,15 @@ var currentPage = function(){
   return page[page.length - 1]
 }
 
-class Favorite {
-  constructor(new_favorite){
-    this.new_favorite = new_favorite;
-    this.favorited = "Favorite";
-  };
-  thankUser() {
+function Favorite(new_favorite) {
+  this.new_favorite = new_favorite;
+  this.favorited = "Favorite";
+};
+Favorite.prototype.thankUser = function() {
     alert("Question has been added to your favorites!");
-  };
-  changeButton() {
-    this.favorited = "    <3    ";
-  };
+};
+Favorite.prototype.changeButton = function() {
+  this.favorited = "    <3    ";
 };
 
 $(function(){
