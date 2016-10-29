@@ -8,7 +8,7 @@ var showMoreAnswer = function(event){
 
 var updatePartials = function(answersPartial, thisPage){
   $('div.question_answers').html(answersPartial);
-  let question_id = thisPage.url.split("/")[2]
+  var question_id = thisPage.url.split("/")[2]
   $.get('/questions/' + question_id + '/options')
   .done(function (options){  
     $('div.question_options').html(options);
