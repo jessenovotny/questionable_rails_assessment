@@ -11,12 +11,19 @@ Specs:
 favorites
 - [x] Include at least one link that loads or updates a resource without reloading the page.
 <!-- eliminated answers new and edit view using buttons to show answer form in question show -->
-- [ ] Translate JSON responses into js model objects.
-
-- [ ] At least one of the js model objects must have at least one method added by your code to the prototype.
+- [x] Translate JSON responses into js model objects.
+<!-- see favorites.js  -->
+- [x] At least one of the js model objects must have at least one method added by your code to the prototype.
+<!-- see favorites.js -->
 
 Confirm
-- [ ] You have a large number of small Git commits
-- [ ] Your commit messages are meaningful
-- [ ] You made the changes in a commit that relate to the commit message
-- [ ] You don't include changes in a commit that aren't related to the commit message
+- [x] You have a large number of small Git commits
+- [x] Your commit messages are meaningful
+- [x] You made the changes in a commit that relate to the commit message
+- [x] You don't include changes in a commit that aren't related to the commit message 
+<!-- I could have done better with this one -->
+
+
+Assessment
+- build a lazy loader or paginate questions#index
+- maybe use handlebar templates in place of partials
