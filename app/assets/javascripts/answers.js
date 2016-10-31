@@ -8,9 +8,7 @@ var showMoreAnswer = function(event){
 
 var updatePartials = function(answersPartial, thisPage){
   $('div.question_answers').html(answersPartial);
-  $('form.upvote').submit(function(event) {
-    updateUpvote(event);
-  });
+  attachUpvoteListener();
   var question_id = thisPage.url.split("/")[2]
   $.get('/questions/' + question_id + '/options')
   .done(function (options){  
@@ -78,13 +76,13 @@ var deleteAnswer = function(event){
   event.preventDefault()
 }
 
-var updateUpvote = function(event){
-  var path = event.target.getAttribute('action');
-  $.post(path, function(upvote) {
-    $('form#answer-' + upvote.answer_id + ' :submit').val("Upvote | " + upvote.answer.upvote_count);
-  });
-  event.preventDefault();
-}
+// var updateUpvote = function(event){
+//   var path = event.target.getAttribute('action');
+//   $.post(path, function(upvote) {
+//     $('form#answer-' + upvote.answer_id + ' :submit').val("Upvote | " + upvote.answer.upvote_count);
+//   });
+//   event.preventDefault();
+// }
 
 var attachAnswersListeners = function(){
   $("p.js-more-answer").click(function(event){

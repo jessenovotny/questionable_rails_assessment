@@ -6,9 +6,12 @@ var updateUpvote = function(event){
   event.preventDefault();
 }
 
-$(function(){
-  // debugger;
+var attachUpvoteListener = function(){
   $('form.upvote').submit(function(event) {
     updateUpvote(event);
   });
+}
+
+$(function(){
+  attachUpvoteListener();
 });
