@@ -76,6 +76,11 @@ var deleteAnswer = function(event){
   event.preventDefault()
 }
 
+// var partialUpdate = function(){
+//   var value = $('textarea#answer_content').val();
+//   $('div.answer_preview').text(value);
+// }
+
 var attachAnswersListeners = function(){
   $("p.js-more-answer").click(function(event){
     showMoreAnswer(event);
